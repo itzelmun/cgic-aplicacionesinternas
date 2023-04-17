@@ -1,1 +1,1 @@
-Aplicaciones de cgic
+Aplicaciones de Cgic
