@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	text-align:center;
+
+	}
+table{
+	text-align:center;
+	margin:auto auto;
+	border-collapse:collapse;
+	}
+#header{
+	background:#0099CC;
+	color:#FFFFFF;}
+	
+a{
+	text-decoration:none;
+	font-style:oblique;
+	font-weight:bold;
+	text-decoration:blink;
+	color:#666;
+	}
+	
+a:hover{
+	color:#007700;
+	text-decoration:underline;
+	}
+	
+tr:nth-child(odd){ background:#AEE3E3;}
+tr:nth-child(even){ background: #FFFFFF;}
