@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cgic-aplicacionesourcecode
+  namespace: cgic-aplicacionesinternas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cgic-aplicacionesourcecode
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: cgic-aplicacionesourcecode
+        role: cgic-aplicacionesourcecode
+    spec:
+      containers:
+        - name: cgic-aplicacionesourcecode
+          image: 
+devopsucol/cgic-aplicaciones:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: cgic-aplicacionesourcecode
