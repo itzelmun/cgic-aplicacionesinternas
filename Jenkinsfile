@@ -31,7 +31,7 @@ branch:'main'
                         sh 
 "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
                         
--Dsonar.projectKey=cgic-palicaciones \
+-Dsonar.projectKey=cgic-aplicaciones \
                         
 -Dsonar.projectName=cgic-aplicacionesourcecode \
                         -Dsonar.projectVersion=1.0 \
