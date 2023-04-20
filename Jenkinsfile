@@ -26,7 +26,7 @@ pipeline {
                         -Dsonar.projectKey=cgic-aplicaciones \
                         -Dsonar.projectName=cgic-aplicacionesourcecode \
                         -Dsonar.projectVersion=1.0 \
-                        -Dsonar.sources=cgic-aplicacionesinternas \
+                        -Dsonar.sources=yamlsourcecode \
                         -Dsonar.language=php \
                         -Dsonar.login=${sonarqubeGlobal} \
                         -Dsonar.host.url=http://scanner.ucol.mx:9000 \
