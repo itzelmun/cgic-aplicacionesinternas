@@ -15,7 +15,7 @@ pipeline {
 
        stage('Checkout Source') {
            steps {
-                 git credentialsId: 'github_credential', url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch:'main'
+                 git credentialsId: 'devops-github', url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch:'main'
                  }
         }
 	    
