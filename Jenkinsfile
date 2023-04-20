@@ -33,6 +33,7 @@ pipeline {
                         -Dsonar.report.export.path=sonar-report.json"
                     }
                 }
+
         }
 
         stage('Build image app') {
