@@ -8,6 +8,8 @@ metadata:
 spec:
   selector:
    app: cgic-aplicacionesourcecode
+  type: ExternalName
+  externalName: nginx-internal.service-ns.svc.cluster.local
   type: ClusterIP
   ports:
    - name: http

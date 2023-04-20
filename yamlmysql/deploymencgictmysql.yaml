@@ -16,8 +16,9 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.1.41
+          imagePullPolicy: Always
           env:
-            - name: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD  
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret-mysql
@@ -25,9 +26,11 @@ spec:
           ports:
             - containerPort: 3306
               name: cgic-mysql
+          
           volumeMounts:
             - name: mysql-data-cgic
               mountPath: /var/lib/mysql
+
       volumes:
         - name: mysql-data-cgic
           persistentVolumeClaim:

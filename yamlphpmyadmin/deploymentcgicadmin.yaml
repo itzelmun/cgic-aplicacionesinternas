@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: cgic-admin
-          image: 
-devopsucol/phpmyadmin:cgic-aplicaciones
+          image: devopsucol/phpmyadmin:cgic-aplicaciones
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
@@ -27,6 +27,7 @@ devopsucol/phpmyadmin:cgic-aplicaciones
                 secretKeyRef:
                   name: mysql-secrets
                   key: password
+      
           volumeMounts:
             - name: sessions
               mountPath: /sessions
