@@ -89,10 +89,10 @@ pipeline {
                         }catch(error){}
                     }
 
-                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no deploymencgictmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no deploymentcgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
-                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymencgictmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones-deploy -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicaciones-deploy --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
