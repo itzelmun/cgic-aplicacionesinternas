@@ -266,7 +266,7 @@ stage('Run service phpmyadmin'){
     }
   }
  }
-}
+
 
 
   post{
