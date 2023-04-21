@@ -51,10 +51,10 @@ pipeline {
                     registryCredential = 'devopsucol-dockerhub'
                 }
             steps{
-                dir('app'){
+                dir('yamlsourcecode'){
                     script {
                         docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                            dockerimageapp.push("v1")
+                            dockerImage1.push("v1")
                         }
                     }
                 }
@@ -62,11 +62,11 @@ pipeline {
         }
 
 
-        stage('Build image MYADMIN') {
+        stage('Build image phpmyadmin') {
             steps{
                 dir('yamlphpmyadmin'){
                     script {
-                    dockerimagemyadmin = docker.build dockerimagename2 
+                    dockerImage2 = docker.build dockerimagename2 
                     }
                 }
             }
@@ -74,13 +74,13 @@ pipeline {
 
         stage('Pushing Image MYADMIN') {
             environment {
-                registryCredential = 'dockerhubhaep'
+                registryCredential = 'devopsucol-dockerhub'
             }
             steps{
                 dir('yamlphpmyadmin'){
                     script {
                         docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                            dockerimagemyadmin.push("cgic-aplicaciones")
+                            dockerImage2.push("cgic-aplicaciones")
                         }
                     }
                 }
