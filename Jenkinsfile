@@ -83,8 +83,12 @@ pipeline {
                         sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecodecgic.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcodecgic.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecodecgic.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart namespace cgic-aplicacionesinternas -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart service cgic-aplicaciones-svc -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
@@ -92,8 +96,14 @@ pipeline {
                         sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no deploymentcgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secretcgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f volumencgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart PersistentVolumeClaim cgic-data-disk -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones-deploy -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart service cgic-aplicaciones-svc -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicaciones-deploy --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
@@ -101,8 +111,11 @@ pipeline {
                         sh 'cd yamlphpmyadmin && scp -r -o StrictHostKeyChecking=no deploymentcgicadmin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecgicadmin.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgicadmin.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecgicadmin.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones-admin -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart service svc-admin-cgic-aplicaciones -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicaciones-admin -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
