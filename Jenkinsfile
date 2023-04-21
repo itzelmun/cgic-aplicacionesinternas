@@ -80,7 +80,9 @@ pipeline {
         stage('Restarting POD app'){
             steps{
                 sshagent(['sshsanchez']){
+                        sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                         sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no servicecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecodecgic.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
@@ -93,7 +95,11 @@ pipeline {
                         }catch(error){}
                     }
 
+                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no namespacecgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no secretcgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no volumencgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
                         sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no deploymentcgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlmysql && scp -r -o StrictHostKeyChecking=no servicecgicmysql.yaml  digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
@@ -108,7 +114,9 @@ pipeline {
                         }catch(error){}
                     }
 
+                        sh 'cd yamlphpmyadmin && scp -r -o StrictHostKeyChecking=no namespacecgicadmin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                         sh 'cd yamlphpmyadmin && scp -r -o StrictHostKeyChecking=no deploymentcgicadmin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+                        sh 'cd yamlphpmyadmin && scp -r -o StrictHostKeyChecking=no servicecgicadmin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecgicadmin.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
@@ -130,7 +138,7 @@ pipeline {
 
     post{
         success{
-            slackSend channel: 'sanchez', color: 'good', failOnError: true, message: "${custom_msg()}", teamDomain: 'universidadde-bea3869', tokenCredentialId: 'slackpass'
+            slackSend channel: 'cgic_aplicacionesinternas', color: 'good', failOnError: true, message: "${custom_msg()}", teamDomain: 'universidadde-bea3869', tokenCredentialId: 'slackpass'
         }
     }
 }
