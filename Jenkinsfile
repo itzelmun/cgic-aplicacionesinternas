@@ -107,6 +107,7 @@ pipeline {
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcodecgic.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacionescode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
@@ -177,6 +178,7 @@ pipeline {
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgicmysql.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones-mysql -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicaciones-deploy --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
@@ -221,6 +223,7 @@ pipeline {
                     script{
                         try{
                             sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgicadmin.yaml -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment  cgic-aplicaciones-admin -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicaciones-admin -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                         }catch(error){}
                     }
