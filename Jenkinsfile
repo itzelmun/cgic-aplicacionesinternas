@@ -35,7 +35,6 @@ pipeline {
             }
         }   
   
-
         stage('Build image APP') {
             steps{
                 dir('yamlsourcecode') {
