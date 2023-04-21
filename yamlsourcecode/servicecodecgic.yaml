@@ -4,10 +4,10 @@ metadata:
   name: cgic-aplicaciones-svc
   namespace: cgic-aplicacionesinternas
   labels:
-    app: cgic-aplicacionesourcecode
+    app: cgic-aplicacionescode
 spec:
   selector:
-   app: cgic-aplicacionesourcecode
+   app: cgic-aplicacionescode
   type: ExternalName
   externalName: nginx-internal.service-ns.svc.cluster.local
   type: ClusterIP
@@ -17,4 +17,4 @@ spec:
      protocol: TCP
      targetPort: 80
   selector:
-    role: cgic-aplicacionesourcecode
+    role: cgic-aplicacionescode

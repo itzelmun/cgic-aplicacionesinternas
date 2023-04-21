@@ -25,7 +25,7 @@ spec:
             - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secrets
+                  name: cgic-secret-mysql
                   key: password
       
           volumeMounts:

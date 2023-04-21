@@ -18,7 +18,7 @@ spec:
           image: mysql:5.1.41
           imagePullPolicy: Always
           env:
-            - name: MYSQL_ROOT_PASSWORD  
+            - name: MYSQL_PASSWORD  
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret-mysql
