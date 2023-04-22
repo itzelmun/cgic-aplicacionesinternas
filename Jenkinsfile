@@ -37,7 +37,7 @@ pipeline {
   
         stage('Build image APP') {
             steps{
-                dir('yamlsourcecode') {
+                dir('sourcecode') {
                     script {
                         dockerImage1 = docker.build dockerimagename1
                     }
@@ -50,7 +50,7 @@ pipeline {
                     registryCredential = 'devopsucol-dockerhub'
                 }
             steps{
-                dir('yamlsourcecode'){
+                dir('sourcecode'){
                     script {
                         docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
                             dockerImage1.push("v1")
@@ -63,7 +63,7 @@ pipeline {
 
         stage('Build image phpmyadmin') {
             steps{
-                dir('yamlphpmyadmin'){
+                dir('db'){
                     script {
                     dockerImage2 = docker.build dockerimagename2 
                     }
@@ -76,7 +76,7 @@ pipeline {
                 registryCredential = 'devopsucol-dockerhub'
             }
             steps{
-                dir('yamlphpmyadmin'){
+                dir('db'){
                     script {
                         docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
                             dockerImage2.push("cgic-aplicaciones")
