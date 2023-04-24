@@ -57,37 +57,35 @@ pipeline {
 	    	}
       	}
 	  
-		stage('Running POD') {
+		stage('Correr POD') {
 		 	steps{
 		   		sshagent(['sshsanchez']){
-      				sh 'cd yamls && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-                    script{
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-                            //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error)
-       					{}
+		
+           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status namespace ds-formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error){}
 					}
 				}
-				sshagent(['sshsanchez']) {
-      				sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-                    script{
+				sshagent(['sshsanchez']){
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
-                            //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error)
-       					{}
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config' 
+           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error){}
 					}
 				}
-				sshagent(['sshsanchez']) {
+				sshagent(['sshsanchez']){
 			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no servicecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-                            //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error)
-       					{}
+           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status service formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error){}
 					}
 				}
 		
