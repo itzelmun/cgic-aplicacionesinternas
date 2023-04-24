@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cgic-aplicacionescode
+  name: cgic-aplicaciones
   namespace: cgic-aplicacionesinternas
   labels:
-    app: cgic-aplicacionescode
+    app: cgic-aplicaciones
 spec:
   selector:
-   app: cgic-aplicacionescode
+   app: cgic-aplicaciones
   type: ExternalName
   externalName: nginx-internal.service-ns.svc.cluster.local
   type: ClusterIP
@@ -17,4 +17,4 @@ spec:
      protocol: TCP
      targetPort: 80
   selector:
-    role: cgic-aplicacionescode
+    role: cgic-aplicaciones

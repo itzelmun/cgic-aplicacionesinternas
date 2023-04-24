@@ -1,6 +1,6 @@
 pipeline {
 	environment{
-		dockerimageapp ="devopsucol/cgic-aplicaciones"
+		dockerimageapp ="devopsucol/cgic-aplicaciones:cgic"
 		 dockerapp = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
@@ -21,9 +21,9 @@ pipeline {
         		withSonarQubeEnv('sonarqube') {
          		sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
 					 -Dsonar.projectKey=cgic-aplicaciones \
-                        -Dsonar.projectName=cgic-aplicacionesourcecode \
+                        -Dsonar.projectName=cgic-aplicaciones \
                         -Dsonar.projectVersion=1.0 \
-                        -Dsonar.sources=yamlsourcecode \
+                        -Dsonar.sources=yamls \
                         -Dsonar.language=php \
                         -Dsonar.login=${sonarqubeGlobal} \
                         -Dsonar.host.url=http://scanner.ucol.mx:9000 \
@@ -60,7 +60,7 @@ pipeline {
 		stage('Correr POD') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-      				sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				sh 'cd yamls && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -70,18 +70,18 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-      				sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacionescode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
+                            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicaciones -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
                             //sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacionesourcecode -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}
 				}
 				sshagent(['sshsanchez']) {
-			 		sh 'cd yamlsourcecode && scp -r -o StrictHostKeyChecking=no servicecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no servicecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
