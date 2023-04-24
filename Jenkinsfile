@@ -50,7 +50,7 @@ pipeline {
 				dir('sourcecode') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-							dockerImage1.push("cgic")
+							dockerapp.push("cgic")
 			 			}
 					}
 				}
