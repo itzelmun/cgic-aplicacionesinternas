@@ -57,9 +57,9 @@ pipeline {
 	    	}
       	}
 	  
-		stage('Correr POD') {
+		stage('Running POD') {
 		 	steps{
-		   		sshagent(['sshsanchez']) {
+		   		sshagent(['sshsanchez']){
       				sh 'cd yamls && scp -r -o StrictHostKeyChecking=no namespacecodecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
                     script{
        	 				try{
