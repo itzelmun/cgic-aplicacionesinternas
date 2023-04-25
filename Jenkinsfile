@@ -64,7 +64,6 @@ pipeline {
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f namespacecodecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-		
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status namespace ds-formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error){}
 					}
