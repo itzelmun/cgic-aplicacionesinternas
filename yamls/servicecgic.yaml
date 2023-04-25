@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cgic-aplicacionesvc
-  namespace: cgic-aplicacionesinternas
+  namespace: cgic-aplicaciones
   labels:
     app: cgic-aplicaciones
 spec:

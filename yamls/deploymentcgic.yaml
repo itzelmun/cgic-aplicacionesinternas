@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cgic-aplicaciones
-  namespace: cgic-aplicacionesinternas
+  namespace: cgic-aplicaciones
 spec:
   selector:
    matchLabels:
