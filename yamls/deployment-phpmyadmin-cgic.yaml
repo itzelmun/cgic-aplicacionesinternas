@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: phpmyadmin-cgic
-          image: devopsucol/phpmyadmin
+          image: devopsucol/phpmyadmin:cgic
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -30,7 +30,7 @@ spec:
             - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: secrets-cgic
+                  name: secret-cgic
                   key: password
       
           volumeMounts:
@@ -44,7 +44,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin-svc
+  name: phpmyadmin-service
   namespace: cgic-aplicaciones
 spec:
   type: ClusterIP

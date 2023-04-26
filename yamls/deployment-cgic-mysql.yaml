@@ -27,18 +27,18 @@ spec:
             - name: MYSQL_PASSWORD  
               valueFrom:
                 secretKeyRef:
-                  name: secrets-cgic
+                  name: secret-cgic
                   key: password
           ports:
             - containerPort: 3306
               name: cgic-mysql
           
           volumeMounts:
-            - name: mysql-cgic
+            - name: mysql-cgic-data
               mountPath: /var/lib/mysql
 
       volumes:
-        - name: mysql-cgic
+        - name: mysql-cgic-data
           persistentVolumeClaim:
             claimName: mysql-data-disk-cgic
 
