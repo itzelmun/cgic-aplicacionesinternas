@@ -1,8 +1,8 @@
 pipeline {
 	environment{
 		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
-		dockerImage1 = ""
 		dockerImageName2 = "devopsucol/phpmyadmin:cgic"
+		dockerImage1 = ""
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
@@ -41,13 +41,12 @@ pipeline {
 	     				dockerImage1 = docker.build dockerImageName1
 	    			}
 	   			}
-	  		}
-			steps{
-	   			dir('db'){
+				dir('db'){
 	    			script {
 	     				dockerImage2 = docker.build dockerImageName2
 	    			}
 	   			}
+
 	  		}
 	 	} 
 
@@ -63,10 +62,7 @@ pipeline {
 			 			}
 					}
 				}
-	    	}
 
-
-			steps {
 				dir('db') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
