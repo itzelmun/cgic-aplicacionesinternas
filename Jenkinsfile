@@ -2,6 +2,8 @@ pipeline {
 	environment{
 		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
 		dockerImage1 = ""
+		dockerImageName2 = "devopsucol/phpmyadmin:cgic"
+		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
 	}
@@ -40,6 +42,13 @@ pipeline {
 	    			}
 	   			}
 	  		}
+			steps{
+	   			dir('db'){
+	    			script {
+	     				dockerImage2 = docker.build dockerImageName2
+	    			}
+	   			}
+	  		}
 	 	} 
 
 	 	stage('Subir Imagen') {
@@ -51,6 +60,17 @@ pipeline {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
 							dockerImage1.push("cgic")
+			 			}
+					}
+				}
+	    	}
+
+
+			steps {
+				dir('db') {
+		 			script {
+						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+							dockerImage2.push("cgic")
 			 			}
 					}
 				}
@@ -71,30 +91,33 @@ pipeline {
 					}
 				}
                 
-			// 	sshagent(['rodriguezssh']) {
-			//  		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-ds-formasvaloradas.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      		// 		script{
-       	 	// 			try{
-           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-ds-formasvaloradas.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config' 
-           	// 				//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
-          	// 			}catch(error)
-       		// 			{}
-			// 		}
-			// 	}
-			// 	sshagent(['rodriguezssh']) {
-			//  		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no service-ds-formasvaloradas.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      		// 		script{
-       	 	// 			try{
-           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f service-ds-formasvaloradas.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           	// 				//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status service formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
-          	// 			}catch(error)
-       		// 			{}
-			// 		}
-			// 	}
+				sshagent(['rodriguezssh']) {
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-cgic-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
+       	 				try{
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-cgic-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
+
+           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error)
+       					{}
+					}
+				}
+				sshagent(['rodriguezssh']) {
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-phpmyadmin-cgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
+       	 				try{
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status service phpmyadmin-cgic -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error)
+       					{}
+					}
+				}
 		
     
-			//
+			
 			 }
             		
 		}
