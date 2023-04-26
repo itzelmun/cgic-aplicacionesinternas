@@ -71,7 +71,6 @@ pipeline {
 					}
 				}
                 
-                
 			// 	sshagent(['rodriguezssh']) {
 			//  		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-ds-formasvaloradas.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       		// 		script{
