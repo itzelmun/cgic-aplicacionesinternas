@@ -1,7 +1,7 @@
 pipeline {
 	environment{
-		dockerimageapp ="devopsucol/cgic-aplicaciones:cgic"
-		dockerapp = ""
+		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
+		dockerImage1 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
 	}
@@ -11,7 +11,7 @@ pipeline {
 	stages {
 		stage('Chechout Source'){
 	  		  steps {
-               git credentialsId: 'devops-github', url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch:'main'
+                git credentialsId: 'devops-github' , url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch: 'main'
             }
 	 	}
 
@@ -20,14 +20,14 @@ pipeline {
       		steps {
         		withSonarQubeEnv('sonarqube') {
          		sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
-					 -Dsonar.projectKey=cgic-aplicacion \
-                        -Dsonar.projectName=cgic-aplicacion \
-                        -Dsonar.projectVersion=1.0 \
-                        -Dsonar.sources=yamls \
-                        -Dsonar.language=php \
-                        -Dsonar.login=${sonarqubeGlobal} \
-                        -Dsonar.host.url=http://scanner.ucol.mx:9000 \
-                        -Dsonar.report.export.path=sonar-report.json"
+					-Dsonar.projectKey=cgic-aplicacion \
+					-Dsonar.projectName=cgic-aplicacion \
+					-Dsonar.projectVersion=1.0 \
+					-Dsonar.sources=sourcecode \
+					-Dsonar.language=php \
+					-Dsonar.login=${sonarqubeGlobal} \
+					-Dsonar.host.url=http://scanner.ucol.mx:9000 \
+					-Dsonar.report.export.path=sonar-report.json"
         		}
       		}
    		}
@@ -36,7 +36,7 @@ pipeline {
 	  		steps{
 	   			dir('sourcecode'){
 	    			script {
-	     				dockerapp = docker.build dockerimageapp
+	     				dockerImage1 = docker.build dockerImageName1
 	    			}
 	   			}
 	  		}
@@ -50,7 +50,7 @@ pipeline {
 				dir('sourcecode') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-							dockerapp.push("cgic")
+							dockerImage1.push("cgic")
 			 			}
 					}
 				}
@@ -59,38 +59,43 @@ pipeline {
 	  
 		stage('Correr POD') {
 		 	steps{
-		   		sshagent(['sshsanchez']){
+		   		sshagent(['rodriguezssh']) {
 			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error){}
-					}
-				}
-/*
-				sshagent(['sshsanchez']){
-			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      				script{
-       	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacionesdeploy -n cgic-aplicacionesinternas --kubeconfig=/home/digesetuser/.kube/config' 
-           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error){}
-					}
-				}
-				sshagent(['sshsanchez']){
-			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no servicecgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      				script{
-       	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f servicecgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status service formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error){}
-					}
-				}
 		
-			}		
-            */
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error)
+       					{}
+					}
+				}
+                
+			// 	sshagent(['rodriguezssh']) {
+			//  		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-ds-formasvaloradas.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      		// 		script{
+       	 	// 			try{
+           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-ds-formasvaloradas.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config' 
+           	// 				//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          	// 			}catch(error)
+       		// 			{}
+			// 		}
+			// 	}
+			// 	sshagent(['rodriguezssh']) {
+			//  		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no service-ds-formasvaloradas.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      		// 		script{
+       	 	// 			try{
+           	// 				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f service-ds-formasvaloradas.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           	// 				//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status service formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
+          	// 			}catch(error)
+       		// 			{}
+			// 		}
+			// 	}
+		
+    
+			// }
+            		
 		}
 	}
 
@@ -108,4 +113,3 @@ pipeline {
    def JENKINS_LOG= " DEPLOY LOG: Job [${env.JOB_NAME}] Logs path: ${JENKINS_URL}/job/${JOB_NAME}/${BUILD_ID}/consoleText"
    return JENKINS_LOG
 }
-
