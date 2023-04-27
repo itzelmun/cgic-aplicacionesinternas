@@ -2,7 +2,18 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: cgic-aplicaciones
-
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cgic-volumen
+  namespace: cgic-aplicaciones
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Secret
@@ -12,20 +23,6 @@ metadata:
 type: Opaque
 data:
   password: Y2dpYy1hcGxpY2FjaW9uZXM=
-  
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-data-disk-cgic
-  namespace: cgic-aplicaciones
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,9 +42,8 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:latest
-          imagePullPolicy: Always
           env:
-            - name: MYSQL_PASSWORD  
+            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: secret-cgic
@@ -55,21 +51,18 @@ spec:
           ports:
             - containerPort: 3306
               name: cgic-mysql
-          
           volumeMounts:
-            - name: mysql-cgic-data
+            - name: cgic-volumen
               mountPath: /var/lib/mysql
-
       volumes:
-        - name: mysql-cgic-data
+        - name: cgic-volumen
           persistentVolumeClaim:
             claimName: mysql-data-disk-cgic
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cgic-mysql-svc
+  name: mysql-service-itzel
   namespace: cgic-aplicaciones
 spec:
   selector:
