@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cgic-volumen
+  name: mysql-data-disk
   namespace: cgic-aplicaciones
 spec:
   accessModes:
@@ -22,25 +22,25 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  password: Y2dpYy1hcGxpY2FjaW9uZXM=
+  password: c3VwZXI=
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-aplicacion-mysql
+  name: mysql-deployment
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cgic-mysql
+      app: mysql
   template:
     metadata:
       labels:
-        app: cgic-mysql
+        app: mysql
     spec:
       containers:
-        - name: cgic-mysql
+        - name: mysql
           image: mysql:latest
           env:
             - name: MYSQL_PASSWORD
@@ -50,14 +50,14 @@ spec:
                   key: password
           ports:
             - containerPort: 3306
-              name: cgic-mysql
+              name: mysql
           volumeMounts:
-            - name: volumen-mysql
+            - name: mysql-data
               mountPath: /var/lib/mysql
       volumes:
-        - name: volumen-mysql
+        - name: mysql-data
           persistentVolumeClaim:
-            claimName: cgic-volumen
+            claimName: mysql-data-disk
 ---
 apiVersion: v1
 kind: Service
@@ -65,10 +65,13 @@ metadata:
   name: cgic-mysql-svc
   namespace: cgic-aplicaciones
 spec:
+spec:
   selector:
-    app: cgic-mysql
+    app: mysql
   type: ClusterIP
   ports:
-    - name: cgic-mysql
+    - name: mysql
       port: 3306
       targetPort: 3306
+
+

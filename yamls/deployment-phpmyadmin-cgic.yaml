@@ -6,7 +6,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin-cgic
+  name: phpmyadmin-cgic-app
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -44,7 +44,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin-service
+  name: phpmyadmin-svc
   namespace: cgic-aplicaciones
 spec:
   type: ClusterIP
