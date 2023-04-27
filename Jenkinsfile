@@ -81,7 +81,7 @@ pipeline {
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploymentcgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
 		
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}
@@ -91,8 +91,8 @@ pipeline {
 			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-cgic-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
-							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
+							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
+							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-cgic-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
 
@@ -106,7 +106,7 @@ pipeline {
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-cgic -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-cgic -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}

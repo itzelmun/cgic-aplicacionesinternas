@@ -4,6 +4,29 @@ metadata:
   name: cgic-aplicaciones
 
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-cgic
+  namespace: cgic-aplicaciones
+type: Opaque
+data:
+  password: Y2dpYy1hcGxpY2FjaW9uZXM=
+  
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data-disk-cgic
+  namespace: cgic-aplicaciones
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
