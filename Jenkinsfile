@@ -106,7 +106,7 @@ pipeline {
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-cgic -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}

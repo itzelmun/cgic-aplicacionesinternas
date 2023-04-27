@@ -18,11 +18,11 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: secret
+  name: mysql-secrets
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  PASSWORD: c3VwZXI=
+  password: c3VwZXI=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,8 +46,8 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: secret
-                  key: PASSWORD
+                  name: mysql-secrets
+                  key: password
           ports:
             - containerPort: 3306
               name: mysql
@@ -62,9 +62,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cgic-mysql-svc
+  name: mysql-service
   namespace: cgic-aplicaciones
-spec:
 spec:
   selector:
     app: mysql
@@ -73,5 +72,3 @@ spec:
     - name: mysql
       port: 3306
       targetPort: 3306
-
-
