@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service-itzel
+  name: cgic-mysql-svc
   namespace: cgic-aplicaciones
 spec:
   selector:
