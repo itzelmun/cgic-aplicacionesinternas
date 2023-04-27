@@ -52,12 +52,12 @@ spec:
             - containerPort: 3306
               name: cgic-mysql
           volumeMounts:
-            - name: cgic-volumen
+            - name: volumen-mysql
               mountPath: /var/lib/mysql
       volumes:
-        - name: cgic-volumen
+        - name: volumen-mysql
           persistentVolumeClaim:
-            claimName: mysql-data-disk-cgic
+            claimName: cgic-volumen
 ---
 apiVersion: v1
 kind: Service
