@@ -27,20 +27,20 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: cgic-mysql-deployment
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: mysql-cgic
   template:
     metadata:
       labels:
-        app: mysql
+        app: mysql-cgic
     spec:
       containers:
-        - name: mysql
+        - name: mysql-cgic
           image: mysql:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -50,25 +50,25 @@ spec:
                   key: password
           ports:
             - containerPort: 3306
-              name: mysql
+              name: mysql-cgic
           volumeMounts:
-            - name: mysql-data
+            - name: mysql-data-cgic
               mountPath: /var/lib/mysql
       volumes:
-        - name: mysql-data
+        - name: mysql-data-cgic
           persistentVolumeClaim:
             claimName: mysql-data-disk
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service
+  name: cgic-mysql-service
   namespace: cgic-aplicaciones
 spec:
   selector:
-    app: mysql
+    app: mysql-cgic
   type: ClusterIP
   ports:
-    - name: mysql
+    - name: mysql-cgic
       port: 3306
       targetPort: 3306
