@@ -22,12 +22,16 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  password: c3VwZXI=
+  password: NFRjQ0Y=
+  host: ww.ucol.mx
+  user: wcgic
+  dbname: cgic
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: cgic-mysql-deployment
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -43,11 +47,26 @@ spec:
         - name: mysql-cgic
           image: mysql:latest
           env:
-            - name: MYSQL_ROOT_PASSWORD
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: host
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: user
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: mysql-secrets
                   key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: dbname
           ports:
             - containerPort: 3306
               name: mysql-cgic
