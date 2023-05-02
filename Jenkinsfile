@@ -1,9 +1,7 @@
 pipeline {
 	environment{
 		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
-		dockerImageName2 = "devopsucol/phpmyadmin:cgic"
 		dockerImage1 = ""
-		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
 	}
@@ -41,11 +39,6 @@ pipeline {
 	     				dockerImage1 = docker.build dockerImageName1
 	    			}
 	   			}
-				dir('db'){
-	    			script {
-	     				dockerImage2 = docker.build dockerImageName2
-	    			}
-	   			}
 
 	  		}
 	 	} 
@@ -63,13 +56,6 @@ pipeline {
 					}
 				}
 
-				dir('db') {
-		 			script {
-						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-							dockerImage2.push("cgic")
-			 			}
-					}
-				}
 	    	}
       	}
 	  
@@ -97,16 +83,6 @@ pipeline {
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deployment -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
 
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error)
-       					{}
-					}
-				}
-				sshagent(['rodriguezssh']) {
-			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-phpmyadmin-cgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      				script{
-       	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}
