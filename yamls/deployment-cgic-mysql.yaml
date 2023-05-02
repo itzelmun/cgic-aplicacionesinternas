@@ -31,7 +31,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysql-deployment
+  name: cgic-mysql-deploy
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -44,19 +44,10 @@ spec:
         app: mysql-cgic
     spec:
       containers:
-        - name: mysql-cgic
-          image: mysql:latest
-          env:
             - name: DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secrets
-                  key: host
+              value: host
             - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secrets
-                  key: user
+              value: user
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
