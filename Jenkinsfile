@@ -100,7 +100,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploy-phpmyadmin.cgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploy-phpmyadmin-cgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
