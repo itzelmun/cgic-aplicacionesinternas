@@ -39,7 +39,6 @@ pipeline {
 	     				dockerImage1 = docker.build dockerImageName1
 	    			}
 	   			}
-
 	  		}
 	 	} 
 
@@ -55,7 +54,6 @@ pipeline {
 			 			}
 					}
 				}
-
 	    	}
       	}
 	  
@@ -87,11 +85,7 @@ pipeline {
        					{}
 					}
 				}
-		
-    
-			
-			 }
-            		
+			 } 		
 		}
 	}
 

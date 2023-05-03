@@ -27,7 +27,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysql-deploy
+  name: cgic-mysql
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -52,7 +52,7 @@ spec:
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secrets
+                  name: cgic-secret
                   key: password
           ports:
             - containerPort: 3306
@@ -68,7 +68,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service
+  name: mysql-svc
   namespace: cgic-aplicaciones
 spec:
   selector:
