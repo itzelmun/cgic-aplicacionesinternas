@@ -64,7 +64,7 @@ pipeline {
 				dir('db') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-							dockerImage2.push("cgic-db")
+							dockerImage2.push("cgicdb")
 			 			}
 					}
 				}
