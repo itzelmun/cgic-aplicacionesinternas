@@ -6,21 +6,21 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin
+  name: cgic-phpmyadmin
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: phpmyadmin
+      app: cgic-admin
   template:
     metadata:
       labels:
-        app: phpmyadmin
+        app: cgic-admin
     spec:
       containers:
-        - name: phpmyadmin
-          image: devopsucol/phpmyadmin:cgic
+        - name: cgic-admin
+          image: devopsucol/cgic-aplicaciones:cgic-db
           ports:
             - containerPort: 80
           env:
@@ -41,12 +41,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin-svc
+  name: cgic-admin-svc
   namespace: cgic-aplicaciones
 spec:
   type: ClusterIP
   selector:
-    app: phpmyadmin
+    app: cgic-admin
   ports:
   - protocol: TCP
     port: 80
