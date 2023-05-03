@@ -68,7 +68,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: cgic-mysql-svc
   namespace: cgic-aplicaciones
 spec:
   selector:

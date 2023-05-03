@@ -92,7 +92,7 @@ pipeline {
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-cgic-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql-deploy -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
 
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
