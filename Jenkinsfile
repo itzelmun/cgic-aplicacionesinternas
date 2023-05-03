@@ -61,7 +61,7 @@ pipeline {
 	  
 		stage('Correr POD') {
 		 	steps{
-		   		sshagent(['rodriguezssh']) {
+		   		sshagent(['sshsanchez']) {
 			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deploymentcgic.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
@@ -73,14 +73,14 @@ pipeline {
 					}
 				}
                 
-				sshagent(['rodriguezssh']) {
+				sshagent(['sshsanchez']) {
 			 		sh 'cd yamls && scp -r -o StrictHostKeyChecking=no deployment-cgic-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-cgic-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deployment -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql-deploy -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
 
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)

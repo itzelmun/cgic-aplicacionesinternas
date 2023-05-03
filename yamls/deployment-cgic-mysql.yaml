@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-data-disk
+  name: cgic-mysql-data-disk
   namespace: cgic-aplicaciones
 spec:
   accessModes:
@@ -18,15 +18,11 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mysql-secrets
+  name: cgic-secret
   namespace: cgic-aplicaciones
 type: Opaque
 data:
   password: NFRjQ0Y=
-  host: ww.ucol.mx
-  user: wcgic
-  dbname: cgic
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -37,48 +33,48 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql-cgic
+      app: cgic-mysql
   template:
     metadata:
       labels:
-        app: mysql-cgic
+        app: cgic-mysql
     spec:
       containers:
+        - name: cgic-mysql
+          image: mysql:latest
+          env:
             - name: DB_HOST
-              value: host
+              value: ww.ucol.mx
             - name: DB_USER
-              value: user
-            - name: DB_PASS
+              value: wcgic
+            - name: DB_NAME
+              value: cgic
+            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secrets
                   key: password
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secrets
-                  key: dbname
           ports:
             - containerPort: 3306
-              name: mysql-cgic
+              name: cgic-mysql
           volumeMounts:
-            - name: mysql-data-cgic
+            - name: cgic-mysql-data
               mountPath: /var/lib/mysql
       volumes:
-        - name: mysql-data-cgic
+        - name: cgic-mysql-data
           persistentVolumeClaim:
-            claimName: mysql-data-disk
+            claimName: cgic-mysql-data-disk
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cgic-mysql-service
+  name: mysql-service
   namespace: cgic-aplicaciones
 spec:
   selector:
-    app: mysql-cgic
+    app: cgic-mysql
   type: ClusterIP
   ports:
-    - name: mysql-cgic
+    - name: cgic-mysql
       port: 3306
       targetPort: 3306
