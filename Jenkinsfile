@@ -105,7 +105,7 @@ pipeline {
        	 				try{
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f secret-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
 							//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploy-phpmyadmin.cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deploy-phpmyadmin-cgic.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
 
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment formasvaloradas -n ds-formasvaloradas --kubeconfig=/home/digesetuser/.kube/config'
