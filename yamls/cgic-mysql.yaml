@@ -49,8 +49,6 @@ spec:
               value: wcgic
             - name: DB_NAME
               value: cgic.sql
-            - name: DB_PASS
-              value: NFRjQ0Y=
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
