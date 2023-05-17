@@ -41,19 +41,19 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:8
+          image: mysql:latest
           env:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
-            - name: MYSQL_PASSWORD
+            - name: DB_NAME
+              value: cgic.sql
+            - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
                   key: password
-            - name: DB_NAME
-              value: cgic
           ports:
             - containerPort: 3306
               name: cgic-mysql
