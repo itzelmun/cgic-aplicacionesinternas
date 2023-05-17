@@ -47,13 +47,13 @@ spec:
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
-            - name: DB_NAME
-              value: cgic
-            - name: DB_PASS
+            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
                   key: password
+            - name: DB_NAME
+              value: cgic
           ports:
             - containerPort: 3306
               name: cgic-mysql
