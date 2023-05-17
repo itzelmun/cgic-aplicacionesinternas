@@ -24,9 +24,9 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: PMA_HOST
+            - name: DB_HOST
               value: cgic-mysql-svc
-            - name: PMA_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
