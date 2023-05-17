@@ -22,7 +22,7 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  DB_PASS: NFRjQ0Y=
+  PASSWORD: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,12 +48,12 @@ spec:
             - name: DB_USER
               value: wcgic
             - name: DB_NAME
-              value: cgic.sql
+              value: cgic
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: DB_PASS
+                  key: PASSWORD
           ports:
             - containerPort: 3306
               name: cgic-mysql
