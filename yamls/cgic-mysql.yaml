@@ -41,14 +41,14 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:latest
+          image: mysql:8
           env:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
             - name: DB_NAME
-              value: cgic.sql
+              value: cgic
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
