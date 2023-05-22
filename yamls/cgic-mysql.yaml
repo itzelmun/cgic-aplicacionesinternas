@@ -49,11 +49,6 @@ spec:
               value: wcgic
             - name: DB_NAME
               value: cgic.sql
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: password
           ports:
             - containerPort: 3306
               name: cgic-mysql
