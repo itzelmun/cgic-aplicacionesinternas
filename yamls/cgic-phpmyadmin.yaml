@@ -30,7 +30,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: password
+                  key: MYSQL_ROOT_PASSWORD
           volumeMounts:
             - name: sessions
               mountPath: /sessions
