@@ -20,7 +20,7 @@ kind: Secret
 metadata:
   name: cgic-secret
   namespace: cgic-aplicaciones
-type: Opaque
+type: kubernetes.io/base64
 data:
   password: NFRjQ0Y=
 ---
