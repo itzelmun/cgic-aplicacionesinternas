@@ -20,12 +20,14 @@ spec:
     spec:
       containers:
         - name: cgic-admin
-          image: devopsucol/cgic-aplicaciones:cgicdb
+          image: phpmyadmin/phpmyadmin
           ports:
             - containerPort: 80
           env:
             - name: PMA_HOST
               value: cgic-mysql-svc
+            - name: PMA_USER
+              value: wcgic
             - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
