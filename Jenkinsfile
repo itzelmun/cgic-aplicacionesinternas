@@ -1,7 +1,7 @@
 pipeline {
 	environment{
 		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
-		dockerImageName2 = "phpmyadmin/phpmyadmin"
+		dockerImageName2 = "phpmyadmin/phpmyadmin:cgicdb"
 		dockerImage1 = ""
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
