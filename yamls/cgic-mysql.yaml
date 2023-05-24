@@ -64,6 +64,7 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
+            
 ---
 apiVersion: v1
 kind: Service
