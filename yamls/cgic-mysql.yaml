@@ -22,12 +22,12 @@ metadata:
   namespace: cgic-aplicaciones
 type: kubernetes.io/base64
 data:
-  MYSQL_ROOT_PASSWORD: NFRjQ0Y=
+  DB_PASS: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysqldeploy
+  name: cgic-mysql
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:8.0.18
+          image: mysql:latest
           env:
             - name: DB_HOST
               value: ww.ucol.mx
@@ -53,7 +53,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: MYSQL_ROOT_PASSWORD
+                  key: DB_PASS
           ports:
             - containerPort: 3306
               name: cgic-mysql
@@ -64,7 +64,6 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
-
 ---
 apiVersion: v1
 kind: Service
