@@ -25,12 +25,12 @@ spec:
             - containerPort: 80
           env:
             - name: PMA_HOST
-              value: ww.ucol.mx
+              value: cgic-mysql-svc
             - name: PMA_USER
               value: wcgic
             - name: PMA_NAME
               value: cgic
-            - name: PMA_PASSWORD
+            - name: PMA_PASS
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
