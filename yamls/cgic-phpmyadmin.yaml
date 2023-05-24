@@ -26,10 +26,6 @@ spec:
           env:
             - name: PMA_HOST
               value: cgic-mysql-svc
-            - name: PMA_USER
-              value: wcgic
-            - name: PMA_NAME
-              value: cgic
             - name: PMA_PASS
               valueFrom:
                 secretKeyRef:
