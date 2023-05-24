@@ -24,17 +24,17 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: PMA_HOST
+            - name: DB_HOST
               value: ww.ucol.mx
-            - name: PMA_USER
+            - name: DB_USER
               value: wcgic
-            - name: PMA_NAME
-              value: cgic
-            - name: PMA_PASSWORD
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
                   key: MYSQL_ROOT_PASSWORD
+            - name: DB_NAME
+              value: cgic.sql
           volumeMounts:
             - name: sessions
               mountPath: /sessions
