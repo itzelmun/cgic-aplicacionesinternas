@@ -28,7 +28,7 @@ spec:
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
-            - name: DB_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
