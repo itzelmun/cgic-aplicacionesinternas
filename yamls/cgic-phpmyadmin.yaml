@@ -20,21 +20,21 @@ spec:
     spec:
       containers:
         - name: cgic-admin
-          image: phpmyadmin/phpmyadmin   
+          image: devopsucol/cgic-aplicaciones:cgicdb
           ports:
             - containerPort: 80
           env:
-            - name: DB_HOST
-              value: cgic-mysql-svc
-            - name: DB_USER
+            - name: PMA_HOST
+              value: ww.ucol.mx
+            - name: PMA_USER
               value: wcgic
-            - name: DB_PASS
+            - name: PMA_NAME
+              value: cgic
+            - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: MYSQL_ROOT_PASSWORD
-            - name: DB_NAME
-              value: cgic.sql
+                  key: DB_PASS
           volumeMounts:
             - name: sessions
               mountPath: /sessions
@@ -52,6 +52,6 @@ spec:
   selector:
     app: cgic-admin
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  - protocol: TCP
+    port: 80
+    targetPort: 80
