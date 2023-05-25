@@ -23,6 +23,7 @@ metadata:
 type: kubernetes.io/base64
 data:
   DB_PASS: NFRjQ0Y=
+  DB_USER_PASSWORD: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,7 +47,6 @@ spec:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
-            - name: DB_USER-NEW
               value: wcgic
             - name: DB_NAME
               value: cgic.sql
@@ -57,16 +57,29 @@ spec:
                   key: DB_PASS
             - name: MAX_UPLOAD_FILE
               value: "500M"
+            - name: DB_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: DB_USER_PASSWORD
           ports:
             - containerPort: 3306
               name: cgic-mysql
           volumeMounts:
             - name: cgic-mysql-data
               mountPath: /var/lib/mysql
+          command: ["/bin/sh", "-c", "mysql -u root -p$MYSQL_ROOT_PASSWORD -e 'CREATE USER \"$DB_USER\" IDENTIFIED BY \"$DB_USER_PASSWORD\";'"]
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
+ ---
+  spec:
+    template:
+      spec:
+        containers:
+          - name: cgic-mysql
+            command: ["sh", "-c", "mysql -e 'CREATE USER \"nuevo_usuario\" IDENTIFIED BY \"nueva_contraseña\";'"]
 
 ---
 apiVersion: v1
