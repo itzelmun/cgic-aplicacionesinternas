@@ -13,7 +13,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 ---
 apiVersion: v1
 kind: Secret
@@ -23,6 +23,7 @@ metadata:
 type: Opaque
 data:
   DB_PASS: NFRjQ0Y=
+  DB_USER_PASSWORD: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,6 +55,13 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
+            - name: MAX_UPLOAD_FILE
+              value: "1G"
+            - name: DB_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: DB_USER_PASSWORD
           ports:
             - containerPort: 3306
               name: cgic-mysql
