@@ -73,6 +73,7 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
+            
  ---
   spec:
     template:
