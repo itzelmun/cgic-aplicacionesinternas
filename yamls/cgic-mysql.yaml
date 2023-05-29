@@ -55,8 +55,8 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
-            - name: MAX_UPLOAD_FILE
-              value: "1G"
+            - name: UPLOAD_MAX_FILESIZE
+              value: "100M"  
             - name: DB_USER_PASSWORD
               valueFrom:
                 secretKeyRef:

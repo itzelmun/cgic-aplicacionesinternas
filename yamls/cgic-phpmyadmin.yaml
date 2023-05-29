@@ -31,6 +31,8 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
+            - name: UPLOAD_MAX_FILESIZE
+              value: "100M"  
           volumeMounts:
             - name: sessions
               mountPath: /sessions
