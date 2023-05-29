@@ -66,15 +66,7 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
-            
- ---
-  spec:
-    template:
-      spec:
-        containers:
-          - name: cgic-mysql
-            command: ["sh", "-c", "mysql -e 'CREATE USER \"nuevo_usuario\" IDENTIFIED BY \"nueva_contraseña\";'"]
-
+ 
 ---
 apiVersion: v1
 kind: Service
