@@ -55,13 +55,6 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
-            - name: MAX_UPLOAD_FILE
-              value: "500M"
-            - name: DB_USER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: DB_USER_PASSWORD
           ports:
             - containerPort: 3306
               name: cgic-mysql
