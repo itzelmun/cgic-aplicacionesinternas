@@ -20,15 +20,14 @@ kind: Secret
 metadata:
   name: cgic-secret
   namespace: cgic-aplicaciones
-type: kubernetes.io/base64
+type: Opaque
 data:
   DB_PASS: NFRjQ0Y=
-  DB_USER_PASSWORD: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysql
+  name: cgic-mysqldeploy
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -42,7 +41,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:5.7
+          image: mysql:latest
           env:
             - name: DB_HOST
               value: ww.ucol.mx
@@ -61,12 +60,10 @@ spec:
           volumeMounts:
             - name: cgic-mysql-data
               mountPath: /var/lib/mysql
-          command: ["/bin/sh", "-c", "mysql -u root -p$MYSQL_ROOT_PASSWORD -e 'CREATE USER \"$DB_USER\" IDENTIFIED BY \"$DB_USER_PASSWORD\";'"]
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
- 
 ---
 apiVersion: v1
 kind: Service
