@@ -32,7 +32,7 @@ spec:
                   name: cgic-secret
                   key: DB_PASS
             - name: UPLOAD_MAX_FILESIZE
-              value: "100M"  
+              value: "1G"  
           volumeMounts:
             - name: sessions
               mountPath: /sessions
