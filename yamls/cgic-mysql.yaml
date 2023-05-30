@@ -42,9 +42,7 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.5
-          command: ["/bin/bash", "-c"]
-          args:
-            - "mysql -uroot -p$MYSQL_ROOT_PASSWORD $DB_NAME < /docker-entrypoint-initdb.d/cgic.sql"
+          command: ["mysql", "-uroot", "-pMYSQL_ROOT_PASSWORD", "$DB_NAME", "<", "/docker-entrypoint-initdb.d/cgic.sql"]
           env:
             - name: DB_HOST
               value: ww.ucol.mx
