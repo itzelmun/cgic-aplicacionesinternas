@@ -9,7 +9,6 @@ metadata:
   name: cgic-mysql-data-disk
   namespace: cgic-aplicaciones
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
