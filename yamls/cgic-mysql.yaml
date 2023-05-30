@@ -43,13 +43,16 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.5
+          command: ["/bin/bash", "-c"]
+          args:
+            - "mysql -uroot -p$DB_PASS $DB_NAME < /docker-entrypoint-initdb.d/cgic.sql"
           env:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
             - name: DB_NAME
-              value: cgic.sql
+              value: cgic
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -67,6 +70,7 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
+
 ---
 apiVersion: v1
 kind: Service
