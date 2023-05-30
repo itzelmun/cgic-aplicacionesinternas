@@ -23,7 +23,7 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  DB_PASS: NFRjQ0Y=
+  MYSQL_ROOT_PASSWORD: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,7 +57,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: DB_PASS
+                  key: MYSQL_ROOT_PASSWORD
             - name: UPLOAD_MAX_FILESIZE
               value: "2G"  
           ports:
