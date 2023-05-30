@@ -9,6 +9,7 @@ metadata:
   name: cgic-mysql-data-disk
   namespace: cgic-aplicaciones
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -55,7 +56,7 @@ spec:
                   name: cgic-secret
                   key: DB_PASS
             - name: UPLOAD_MAX_FILESIZE
-              value: "1G"  
+              value: "2G"  
           ports:
             - containerPort: 3306
               name: cgic-mysql
