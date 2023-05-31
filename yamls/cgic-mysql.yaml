@@ -51,7 +51,10 @@ spec:
             - name: DB_NAME
               value: cgic
             - name: MYSQL_ROOT_PASSWORD
-              value: "{{- with secret 'cgic-secret' -}}{{- .Data.MYSQL_ROOT_PASSWORD | b64dec -}}{{- end -}}" 
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
               name: cgic-mysql
