@@ -13,7 +13,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Secret
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:5.5
+          image: mysql:latest
           command: ["mysql", "-uroot", "-pMYSQL_ROOT_PASSWORD", "$DB_NAME", "<", "/var/lib/mysql/cgic.sql"]
           env:
             - name: DB_HOST
