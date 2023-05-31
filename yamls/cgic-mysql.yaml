@@ -42,7 +42,7 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.5
-          command: ["mysql", "-uroot", "-pMYSQL_ROOT_PASSWORD", "$DB_NAME", "<", "/docker-entrypoint-initdb.d/cgic.sql"]
+          command: ["mysql", "-uroot", "-pMYSQL_ROOT_PASSWORD", "$DB_NAME", "<", "/var/lib/mysql/cgic.sql"]
           env:
             - name: DB_HOST
               value: ww.ucol.mx
@@ -51,12 +51,7 @@ spec:
             - name: DB_NAME
               value: cgic
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: MYSQL_ROOT_PASSWORD
-            - name: UPLOAD_MAX_FILESIZE
-              value: "2G"  
+              value: "{{- with secret 'cgic-secret' -}}{{- .Data.MYSQL_ROOT_PASSWORD | b64dec -}}{{- end -}}" 
           ports:
             - containerPort: 3306
               name: cgic-mysql
