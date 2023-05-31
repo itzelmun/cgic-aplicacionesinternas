@@ -8,7 +8,8 @@
 -- PHP Version: 5.3.2-1ubuntu4.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-CREATE DATABASE cgic;
+CREATE DATABASE IF NOT EXISTS `cgic`;
+USE `cgic`;
 CREATE USER 'wcgic'@'ww.ucol.mx' IDENTIFIED BY '4TcCF';
 GRANT ALL PRIVILEGES ON cgic.* TO 'wcgic'@'ww.ucol.mx';
 FLUSH PRIVILEGES;
