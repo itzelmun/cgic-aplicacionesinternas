@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:latest
+          image: mysql:5.5
           env:
             - name: DB_HOST
               value: ww.ucol.mx
