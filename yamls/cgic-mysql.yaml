@@ -44,7 +44,7 @@ spec:
           image: mysql:5.5
           env:
             - name: DB_HOST
-              value: ww.ucol.mx
+              value: localhost
             - name: DB_USER
               value: wcgic
             - name: DB_NAME
