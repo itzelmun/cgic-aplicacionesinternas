@@ -24,8 +24,9 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  DB_PASS: NFRjQ0Y=
-
+  DB_USER: d2NnaWM=  
+  DB_PASS: NFRjQ0Y=  
+ 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -47,9 +48,17 @@ spec:
           image: mysql:5.5
           env:
             - name: DB_HOST
-              value: tcp://ww.ucol.mx:3306
+              value: ww.ucol.mx
             - name: DB_USER
-              value: wcgic
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: DB_PASS
             - name: DB_NAME
               value: cgic
             - name: MYSQL_ROOT_PASSWORD
