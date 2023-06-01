@@ -24,7 +24,6 @@ metadata:
   namespace: cgic-aplicaciones
 type: Opaque
 data:
-  DB_USER: d2NnaWM=  
   DB_PASS: NFRjQ0Y=  
  
 ---
@@ -46,14 +45,14 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.5
+          command:
+            - "mysqld"
+            - "--secure-file-priv=/var/lib/mysql-files"
           env:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: DB_USER
+              value: wcgic
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
