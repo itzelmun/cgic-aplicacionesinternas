@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: cgic-aplicaciones
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -15,22 +14,20 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: cgic-secret
   namespace: cgic-aplicaciones
-type: Opaque
+type: kubernetes.io/base64
 data:
-  DB_PASS: NFRjQ0Y=  
- 
+  DB_PASS: NFRjQ0Y=
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysqldeploy
+  name: cgic-mysql
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
@@ -44,22 +41,14 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:5.5
-          command:
-            - "mysqld"
-            - "--secure-file-priv=/var/lib/mysql-files"
+          image: mysql:latest
           env:
             - name: DB_HOST
               value: ww.ucol.mx
             - name: DB_USER
               value: wcgic
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: DB_PASS
             - name: DB_NAME
-              value: cgic
+              value: cgic.sql
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -75,7 +64,6 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
-
 ---
 apiVersion: v1
 kind: Service
@@ -90,3 +78,13 @@ spec:
     - name: cgic-mysql
       port: 3306
       targetPort: 3306
+
+
+
+
+
+
+
+
+
+
