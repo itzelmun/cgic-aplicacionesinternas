@@ -37,6 +37,7 @@ spec:
       volumes:
         - name: sessions
           emptyDir: {}
+          
 ---
 apiVersion: v1
 kind: Service
