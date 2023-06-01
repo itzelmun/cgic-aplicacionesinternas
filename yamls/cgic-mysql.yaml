@@ -43,13 +43,13 @@ spec:
         - name: cgic-mysql
           image: mysql:5.5
           env:
-            - name: DB_HOST
-              value: localhost
-            - name: DB_USER
-              value: wcgic
-            - name: DB_NAME
-              value: cgic.sql
             - name: MYSQL_ROOT_PASSWORD
+              value: rootpassword
+            - name: MYSQL_DATABASE
+              value: cgic
+            - name: MYSQL_USER
+              value: wcgic
+            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
