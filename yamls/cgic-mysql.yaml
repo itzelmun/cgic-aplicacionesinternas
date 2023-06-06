@@ -23,6 +23,7 @@ metadata:
 type: kubernetes.io/base64
 data:
   DB_PASS: NFRjQ0Y=
+  
 ---
 apiVersion: apps/v1
 kind: Deployment
