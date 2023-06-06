@@ -41,7 +41,7 @@ pipeline {
 	     				dockerImage1 = docker.build dockerImageName1
 	    			}
 	   			}
-				dir('db'){
+				dir('db/phpmyadmin'){
 	    			script {
 	     				dockerImage2 = docker.build dockerImageName2
 	    			}
@@ -61,7 +61,7 @@ pipeline {
 			 			}
 					}
 				}
-				dir('db') {
+				dir('db/phpmyadmin') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
 							dockerImage2.push("cgicdb")
