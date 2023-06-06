@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cgic-aplicacion
+  namespace: cgic-aplicaciones
+spec:
+  selector:
+   matchLabels:
+    app: cgic-aplicacion
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cgic-aplicacion
+        role: cgic-aplicacion
+    spec:
+      containers:
+        - name: cgic-aplicacion
+          image: devopsucol/cgic-aplicaciones:cgic
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: cgic-aplicacion

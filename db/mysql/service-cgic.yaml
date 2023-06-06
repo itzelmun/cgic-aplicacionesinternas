@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cgic-mysql-svc
+  namespace: cgic-aplicaciones
+spec:
+  selector:
+    app: cgic-mysql
+  type: ClusterIP
+  ports:
+    - name: cgic-mysql
+      port: 3306
+      targetPort: 3306
