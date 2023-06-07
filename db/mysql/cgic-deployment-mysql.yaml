@@ -35,7 +35,7 @@ spec:
               name: cgic-mysql
           volumeMounts:
             - name: cgic-mysql-data
-              mountPath: /var/lib/mysql/cgic.sql
+              mountPath: /var/lib/mysql
               subPath: cgic.sql
       volumes:
         - name: cgic-mysql-data
