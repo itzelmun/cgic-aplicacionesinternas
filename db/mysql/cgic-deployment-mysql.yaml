@@ -22,7 +22,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: rootpassword
             - name: MYSQL_DATABASE
-              value: cgic.sqls
+              value: cgic
             - name: MYSQL_USER
               value: wcgic
             - name: MYSQL_PASSWORD
@@ -36,9 +36,11 @@ spec:
           volumeMounts:
             - name: cgic-mysql-data
               mountPath: /var/lib/mysql
-              subPath: cgic.sql
+              readOnly: true
       volumes:
         - name: cgic-mysql-data
+          hostPath:
+            path: CGIC_APLICACIONESINTERNAS/db/cgic.sql
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
 
