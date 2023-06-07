@@ -36,7 +36,6 @@ spec:
           volumeMounts:
             - name: cgic-mysql-data
               mountPath: /var/lib/mysql
-              readOnly: true
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
