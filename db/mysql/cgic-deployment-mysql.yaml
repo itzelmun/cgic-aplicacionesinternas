@@ -22,7 +22,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: rootpassword
             - name: MYSQL_DATABASE
-              value: cgic
+              value: cgic.sqls
             - name: MYSQL_USER
               value: wcgic
             - name: MYSQL_PASSWORD
