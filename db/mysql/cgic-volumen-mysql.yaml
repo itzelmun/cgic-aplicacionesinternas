@@ -1,11 +1,29 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  namespace: cgic-aplicaciones
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/"
+---
+
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cgic-mysql-data-disk
   namespace: cgic-aplicaciones
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 3Gi
