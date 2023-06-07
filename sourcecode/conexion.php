@@ -1,9 +1,9 @@
 <?php
 
 $nombre_host = $_ENV['DB_HOST'];
-$usuario_bd = $_ENV['DB_USER'];
-$contrasena_bd = $_ENV['DB_PASS'];
-$base_datos_nombre = $_ENV['DB_NAME'];
+$usuario_bd = $_ENV['MYSQL_USER'];
+$contrasena_bd = $_ENV['MYSQL_PASSWORD'];
+$base_datos_nombre = $_ENV['MYSQL_DATABASE'];
 
 //$maxUploadSize = $_ENV['UPLOAD_MAX_FILESIZE'];
 //echo "El tamaño máximo de carga permitido es: " . $maxUploadSize;
