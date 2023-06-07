@@ -39,9 +39,8 @@ spec:
               readOnly: true
       volumes:
         - name: cgic-mysql-data
-          hostPath:
-            path: CGIC_APLICACIONESINTERNAS/db/cgic.sql
-          
+          persistentVolumeClaim:
+            claimName: cgic-mysql-data-disk
 
 
 
