@@ -61,6 +61,7 @@ pipeline {
 			 			}
 					}
 				}
+				
 				dir('db/phpmyadmin') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
@@ -158,6 +159,7 @@ pipeline {
 		
 			}		
 		}
+
 
 		stage('Correr POD phpmyadmin') {
 		 	steps{
