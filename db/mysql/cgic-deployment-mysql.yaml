@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:5.5
+          image: mysql:8.0.0
           env:
             - name: DB_HOST
               value: localhost
@@ -35,7 +35,7 @@ spec:
               name: cgic-mysql
           volumeMounts:
             - name: cgic-mysql-data
-              mountPath: /var/lib/mysql
+              mountPath: /var/lib/
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
