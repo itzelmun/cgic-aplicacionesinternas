@@ -16,6 +16,7 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.5
+          imagePullPolicy: Always
           env:
             - name: DB_HOST
               value: localhost
@@ -35,7 +36,7 @@ spec:
               name: cgic-mysql
           volumeMounts:
             - name: cgic-mysql-data
-              mountPath: /docker-entrypoint-initdb.d
+              mountPath: /var/lib
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
