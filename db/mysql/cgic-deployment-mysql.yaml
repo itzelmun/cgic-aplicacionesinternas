@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:8.0.0
+          image: mysql:8.0.3
           env:
             - name: DB_HOST
               value: localhost
