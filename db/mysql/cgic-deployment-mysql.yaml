@@ -36,6 +36,13 @@ spec:
           volumeMounts:
             - name: cgic-mysql-data
               mountPath: /var/lib/
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
