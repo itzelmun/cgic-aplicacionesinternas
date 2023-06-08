@@ -45,7 +45,6 @@ spec:
               memory: "1Gi"
       volumes:
         - name: cgic-mysql-data
-          emptyDir: {}
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
 
