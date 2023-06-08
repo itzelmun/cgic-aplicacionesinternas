@@ -43,6 +43,7 @@ spec:
             requests:
               cpu: "500m"
               memory: "1Gi"
+          command: ["bash", "-c", "mysql -u root -p$MYSQL_ROOT_PASSWORD < /var/lib/cgic.sql"]
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
