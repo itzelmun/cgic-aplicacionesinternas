@@ -155,8 +155,6 @@ pipeline {
                 				def extractedName = match.group(1)
                 				echo "Extracted pod name: ${extractedName}"
                 				sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/cgic-aplicaciones/cgic.sql ${extractedName}:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-                
-                				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
             				} else {
                 				echo "Unable to extract pod name"
             				}
@@ -166,6 +164,15 @@ pipeline {
     				}
 				}
 
+				sshagent(['sshsanchez']) {
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
+      				script{
+       	 				try{
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+          				}catch(error)
+       					{}
+					}
+				}
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
