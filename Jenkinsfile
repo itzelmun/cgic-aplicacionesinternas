@@ -162,15 +162,7 @@ pipeline {
         				}
     				}
 				}
-				sshagent(['sshsanchez']) {
-			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
-      				script{
-       	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
-          				}catch(error)
-       					{}
-					}
-				}
+
 			}		
 		}
 		
@@ -222,7 +214,7 @@ pipeline {
 			}		
 		}
 
-	
+	}
 
  		post{
         	success{
