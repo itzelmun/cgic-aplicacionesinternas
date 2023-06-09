@@ -184,6 +184,16 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
+			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
+       	 				try{
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql cgic-mysql :/docker-entrypoint-initdb.d/ --kubeconfig=/home/digesetuser/.kube/config'
+           			
+          				}catch(error)
+       					{}
+					}
+				}
+				sshagent(['sshsanchez']) {
 			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
