@@ -39,8 +39,6 @@ spec:
               mountPath: /var/lib/mysql
       volumes:
         - name: cgic-mysql-data
-          hostPath:
-            path: /home/digesetuser/db/cgic.sql
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
 
