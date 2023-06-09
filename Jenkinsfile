@@ -136,12 +136,39 @@ pipeline {
        					{}
 					}
 				}
+
+				sshagent(['sshsanchez']) {
+    				sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    				script {
+        				try {
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
+            				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+							def podName = sh (
+								script: 'ssh digesetuser@148.213.1.131 microk8s.kubectl get pod -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config | grep cgic-mysql',
+                				returnStdout: true).trim()
+            				def regex = /cgic-mysql-(.*)/
+            				def match = (podName =~ regex)
+            				if (match) {
+                				def extractedName = match.group(1)
+                				echo "Extracted pod name: ${extractedName}"
+            				} else {
+                				echo "Unable to extract pod name"
+            				}
+        				} catch (error) {
+           				 // Manejar el error
+        				}
+    				}
+				}
+
+
+
+
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql cgic-mysql:/docker-entrypoint-initdb.d/ --kubeconfig=/home/digesetuser/.kube/config'
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/db/cgic.sql cgic-mysql:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config' 
            					//sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
@@ -184,16 +211,6 @@ pipeline {
 					}
 				}
 				
-				sshagent(['sshsanchez']) {
-			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser/'
-      				script{
-       	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/db/cgic.sql cgic-mysql :/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
-           			
-          				}catch(error)
-       					{}
-					}
-				}
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
