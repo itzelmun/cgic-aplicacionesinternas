@@ -155,10 +155,10 @@ pipeline {
                 				def extractedName = match.group(1)
                 				echo "Extracted pod name: ${extractedName}"
                 				sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/cgic-aplicaciones/cgic.sql ${extractedName}:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-            				} else {
+								sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+							} else {
                 				echo "Unable to extract pod name"
             				}
-							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
         				} catch (error) {
             				// Manejar el error
         				}
