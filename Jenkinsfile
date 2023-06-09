@@ -142,7 +142,6 @@ pipeline {
     				script {
         				try {
             				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-
             				def podName = sh (
                 			script: 'ssh digesetuser@148.213.1.131 microk8s.kubectl get pod -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config | grep cgic-mysql',
                 			returnStdout: true
@@ -172,9 +171,9 @@ pipeline {
        					{}
 					}
 				}
-		
 			}		
 		}
+		
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
@@ -223,16 +222,15 @@ pipeline {
 			}		
 		}
 
-	}
+	
 
- 	post{
-         success{
-             slackSend channel: 'cgic_aplicacionesinternas', color: 'good', failOnError: true, message: "${custom_msg()}", teamDomain: 'universidadde-bea3869', tokenCredentialId: 'slackpass' 
- 		}
-       }
+ 		post{
+        	success{
+            	slackSend channel: 'cgic_aplicacionesinternas', color: 'good', failOnError: true, message: "${custom_msg()}", teamDomain: 'universidadde-bea3869', tokenCredentialId: 'slackpass' 
+ 			}
+        }
     }
-   def custom_msg()
-   {
+   def custom_msg(){
    def JENKINS_URL= "jarvis.ucol.mx:8080"
    def JOB_NAME = env.JOB_NAME
    def BUILD_ID= env.BUILD_ID
