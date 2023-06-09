@@ -1,4 +1,4 @@
-FROM phpmyadmin/phpmyadmin:apache
+FROM phpmyadmin:apache
 
 # Copiar archivos de configuración
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
