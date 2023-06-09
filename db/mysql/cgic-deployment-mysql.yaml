@@ -17,8 +17,6 @@ spec:
         - name: cgic-mysql
           image: mysql:5.6.51
           imagePullPolicy: Always
-          command: ["/bin/sh"]
-          args: ["-c", "./entrypoint.sh"]
           env:
             - name: DB_HOST
               value: localhost
