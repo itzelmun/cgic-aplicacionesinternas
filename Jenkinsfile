@@ -183,6 +183,7 @@ pipeline {
        					{}
 					}
 				}
+				/*
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser/'
       				script{
@@ -192,7 +193,7 @@ pipeline {
           				}catch(error)
        					{}
 					}
-				}
+				}*/
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       				script{

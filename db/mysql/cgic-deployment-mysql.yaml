@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: cgic-mysql-data
           hostPath:
-            path: /path/to/dump.sql
+            path: /home/digesetuser/db/cgic.sql
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
 
