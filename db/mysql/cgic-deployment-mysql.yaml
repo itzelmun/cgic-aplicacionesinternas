@@ -36,7 +36,7 @@ spec:
               name: cgic-mysql
           volumeMounts:
             - name: cgic-mysql-data
-              mountPath: /var/lib/mysql
+              mountPath: /docker-entrypoint-initdb.d/
       volumes:
         - name: cgic-mysql-data
           persistentVolumeClaim:
