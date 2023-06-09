@@ -165,13 +165,6 @@ pipeline {
         				}
     				}
 				}
-Con esta corrección, primero aplicaremos el archivo YAML y luego reiniciaremos el despliegue una vez que la aplicación se haya desplegado correctamente.
-
-
-
-
-
-
 
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
