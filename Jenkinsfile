@@ -75,7 +75,7 @@ pipeline {
 		stage('Correr POD proyecto') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-namespace-source.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-namespace-source.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
 							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-namespace-source.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -85,7 +85,7 @@ pipeline {
 				}
                 
 				sshagent(['sshsanchez']) {
-					sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+					sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
 							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -95,7 +95,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-					sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+					sh 'cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
 							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-source.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -110,7 +110,7 @@ pipeline {
 		stage('Correr POD MySQL') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-namespace-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-namespace-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-namespace-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -119,7 +119,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-volumen-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-volumen-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -128,7 +128,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-secret-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-secret-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-secret-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -138,7 +138,7 @@ pipeline {
 				}
 
 				sshagent(['sshsanchez']) {
-    				sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    				sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
     				script {
         				try {
             				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -155,7 +155,7 @@ pipeline {
             				if (match) {
                 				def extractedName = match.group(1)
                 				echo "Extracted pod name: ${extractedName}"
-                				sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/db/cgic.sql ${extractedName}:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+                				sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/cgic-aplicaciones/cgic.sql ${extractedName}:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
             				} else {
                 				echo "Unable to extract pod name"
             				}
@@ -166,7 +166,7 @@ pipeline {
 				}
 
 				sshagent(['sshsanchez']) {
-			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -182,7 +182,7 @@ pipeline {
 		stage('Correr POD phpmyadmin') {
 		 	steps{
 				sshagent(['sshsanchez']) {
-			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-namespace-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -191,7 +191,7 @@ pipeline {
 					}
 				}
 		   		sshagent(['sshsanchez']) {
-			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
@@ -202,7 +202,7 @@ pipeline {
 				}
 				
 				sshagent(['sshsanchez']) {
-			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+			 		sh 'cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
