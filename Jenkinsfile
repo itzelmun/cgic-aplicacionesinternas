@@ -142,7 +142,6 @@ pipeline {
     				script {
         				try {
             				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-            				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
             
             				def podName = sh (
                 			script: 'ssh digesetuser@148.213.1.131 microk8s.kubectl get pod -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config | grep cgic-mysql',
@@ -159,6 +158,7 @@ pipeline {
             				} else {
                 				echo "Unable to extract pod name"
             				}
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
         				} catch (error) {
             				// Manejar el error
         				}
