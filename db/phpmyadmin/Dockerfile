@@ -11,7 +11,6 @@ COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 COPY entrypoint.sh /docker-entrypoint-initdb.d/
 #WORKDIR /script
 
-RUN chmod +x entrypoint.sh
 RUN ./entrypoint.sh
 
 # Reiniciar el servicio de Apache
