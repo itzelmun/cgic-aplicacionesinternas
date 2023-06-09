@@ -16,6 +16,7 @@ spec:
       containers:
         - name: cgic-admin
           image: devopsucol/cgic-aplicaciones:cgicdb
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
