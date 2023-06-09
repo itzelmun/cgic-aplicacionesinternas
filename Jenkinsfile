@@ -142,21 +142,22 @@ pipeline {
     				script {
         				try {
             				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config'
-            
+
             				def podName = sh (
                 			script: 'ssh digesetuser@148.213.1.131 microk8s.kubectl get pod -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config | grep cgic-mysql',
                 			returnStdout: true
             				).trim()
-            
+
             				def regex = /cgic-mysql-(.*)/
             				def match = (podName =~ regex)
-            
+
             				if (match) {
                 				def extractedName = match.group(1)
                 				echo "Extracted pod name: ${extractedName}"
                 				sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/cgic-aplicaciones/cgic.sql ${extractedName}:/docker-entrypoint-initdb.d/ -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-								sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
-							} else {
+                
+                				sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+            				} else {
                 				echo "Unable to extract pod name"
             				}
         				} catch (error) {
@@ -164,6 +165,13 @@ pipeline {
         				}
     				}
 				}
+Con esta corrección, primero aplicaremos el archivo YAML y luego reiniciaremos el despliegue una vez que la aplicación se haya desplegado correctamente.
+
+
+
+
+
+
 
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones'
