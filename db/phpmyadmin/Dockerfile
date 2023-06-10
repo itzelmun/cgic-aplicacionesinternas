@@ -7,15 +7,7 @@ COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 
 # Copiar archivo SQL para migración
 COPY ./cgic.sql /docker-entrypoint-initdb.d/
-#COPY ./entrypoint.sh /docker-entrypoint-initdb.d/
-#WORKDIR /script
-#RUN ./entrypoint.sh
 
-#COPY ./entrypoint.sh /docker-entrypoint-initdb.d
-
-#EXPOSE 3306
-
-#CMD ["mysqld"]
 # Reiniciar el servicio de Apache
 RUN service apache2 restart
 
