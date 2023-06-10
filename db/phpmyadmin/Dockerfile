@@ -10,11 +10,12 @@ COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 #COPY ./entrypoint.sh /docker-entrypoint-initdb.d/
 #WORKDIR /script
 #RUN ./entrypoint.sh
-COPY ./entrypoint.sh /docker-entrypoint-initdb.d
 
-EXPOSE 3306
+#COPY ./entrypoint.sh /docker-entrypoint-initdb.d
 
-CMD ["mysqld"]
+#EXPOSE 3306
+
+#CMD ["mysqld"]
 # Reiniciar el servicio de Apache
 RUN service apache2 restart
 
