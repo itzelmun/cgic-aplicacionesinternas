@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mysql:8
+          image: mysql:5.6.43
           imagePullPolicy: Always
           env:
             - name: DB_HOST
