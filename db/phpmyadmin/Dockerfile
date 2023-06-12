@@ -10,7 +10,7 @@ COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
 
 # Instalar MySQL en el contenedor
 RUN apt-get update
-RUN apt-get install mariadb-server
+RUN apt-get install -y mariadb-server
 #RUN apt-get install -y mysql-server
 
 # Ejecutar el comando para importar el archivo cgic.sql
