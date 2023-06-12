@@ -42,6 +42,11 @@ spec:
         - name: cgic-mysql-data
           persistentVolumeClaim:
             claimName: cgic-mysql-data-disk
+          resources:
+            requests:
+              storage: 10Gi
+            limits:
+              storage: 20Gi
 
 
 
