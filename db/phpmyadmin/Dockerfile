@@ -10,7 +10,7 @@ COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
 
 # Instalar MySQL en el contenedor
 RUN apt-get update
-RUN apt install default-mysql-server
+RUN apt install -y mysql-server-8.0
 #RUN apt-get install -y mariadb-server
 #RUN apt install -y mysql-server
 #RUN apt-get install -y mysql-server-8.0
