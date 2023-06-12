@@ -8,16 +8,11 @@ COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 # Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
 COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
 
-# Instalar MySQL en el contenedor
-RUN apt-get update
-RUN apt install -y mysql-server-8.0
-#RUN apt-get install -y mariadb-server
-#RUN apt install -y mysql-server
-#RUN apt-get install -y mysql-server-8.0
+
 
 # Ejecutar el comando para importar el archivo cgic.sql
-RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
-
+#RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
+CMD ["sh", "-c", "exec mysql -uwcgic -p4TcCF --init-command=\"SET SESSION FOREIGN_KEY_CHECKS=0\" < /docker-entrypoint-initdb.d/cgic.sql"]
 # Variables de entorno para configurar la base de datos
 #ENV MYSQL_DATABASE=nombre_de_la_base_de_datos
 #ENV MYSQL_USER=usuario
