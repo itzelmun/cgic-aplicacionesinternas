@@ -9,8 +9,8 @@ COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
 
 # Instalar MySQL en el contenedor
-RUN sudo apt-get update
-RUN sudo apt-get install -y mysql-server
+RUN /bin/bash -c sudo apt-get update
+RUN /bin/bash -c sudo apt-get install -y mysql-server
 
 # Ejecutar el comando para importar el archivo cgic.sql
 RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
