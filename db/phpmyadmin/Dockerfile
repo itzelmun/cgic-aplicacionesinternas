@@ -5,8 +5,14 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./my.cnf /etc/mysql/
 COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 
-# Copiar archivo SQL para migración
-COPY ./cgic.sql /docker-entrypoint-initdb.d/
+# Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
+COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
+
+# Instalar MySQL en el contenedor
+RUN apt-get update && apt-get install -y mysql-server
+
+# Ejecutar el comando para importar el archivo cgic.sql
+RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
 
 # Variables de entorno para configurar la base de datos
 #ENV MYSQL_DATABASE=nombre_de_la_base_de_datos

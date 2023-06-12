@@ -17,10 +17,6 @@ spec:
         - name: cgic-mysql
           image: mysql:5.6.51
           imagePullPolicy: Always
-          command:
-            - sh
-            - -c
-            - exec mysql -uroot -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
           env:
             - name: DB_HOST
               value: localhost
@@ -44,8 +40,8 @@ spec:
               subPath: cgic.sql
       volumes:
         - name: cgic-mysql-data
-          hostPath:
-            path: /home/digesetuser/cgic-aplicaciones
+          persistentVolumeClaim:
+            claimName: cgic-mysql-data-disk
 
 
 
