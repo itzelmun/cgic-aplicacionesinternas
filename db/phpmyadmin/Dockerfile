@@ -14,12 +14,12 @@ COPY ./cgic.sql /docker-entrypoint-initdb.d/
 #ENV MYSQL_PASSWORD=contrasena
 #ENV MYSQL_ROOT_PASSWORD=root_contrasena
 
-ENV nombre_host=$_ENV['DB_HOST']
-ENV usuario_bd=$_ENV['MYSQL_USER']
-ENV contrasena_bd=$_ENV['MYSQL_PASSWORD']
-ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
+#ENV nombre_host=$_ENV['DB_HOST']
+#ENV usuario_bd=$_ENV['MYSQL_USER']
+#ENV contrasena_bd=$_ENV['MYSQL_PASSWORD']
+#ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
 # Comando para ejecutar el dump.sql al iniciar el contenedor
-CMD ["mysqld"]
+#CMD ["mysqld"]
 
 #Ejecuta script para dumpeo
 #COPY point.sh /script/

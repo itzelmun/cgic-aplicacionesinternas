@@ -147,6 +147,15 @@ pipeline {
 					}
 				}
 				
+				sshagent(['sshsanchez']) {
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no import-job.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      				script{
+       	 				try{
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f import-job.yaml --kubeconfig=/home/digesetuser/.kube/config'
+						}catch(error)
+       					{}
+					}
+				}
 
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/'
