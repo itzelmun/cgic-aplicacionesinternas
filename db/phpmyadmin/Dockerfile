@@ -29,26 +29,21 @@ ADD ./cgic.sql /var/lib/mysql/cgic.sql
 ENV MYSQL_ROOT_PASSWORD=rootpassword
 ENV MYSQL_DATABASE=cgic
 
-# Si necesitas configurar más variables de entorno, puedes hacerlo aquí
-
-# Opcional: si deseas cambiar el puerto de MySQL, puedes descomentar la siguiente línea
-# EXPOSE 3306
 
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
 # COPY my.cnf /etc/mysql/conf.d/my.cnf
 
-# Opcional: si necesitas instalar alguna dependencia adicional, puedes hacerlo utilizando apt-get o apt
-
-# Iniciamos el contenedor ejecutando el script de inicialización de MySQL
-# Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql
-CMD ["mysqld"]
 #Ejecuta script para dumpeo
 #COPY point.sh /script/
 #WORKDIR /script
 #CMD ["/bin/sh", "./point.sh"]
 
 # Reiniciar el servicio de Apache
-RUN service apache2 restart
+#RUN service apache2 restart
 
 # Exponer el puerto 80 (puedes cambiarlo si es necesario)
 EXPOSE 80
+
+# Iniciamos el contenedor ejecutando el script de inicialización de MySQL
+# Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql
+CMD ["mysqld"]
