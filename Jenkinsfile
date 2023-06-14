@@ -17,7 +17,6 @@ pipeline {
                 git credentialsId: 'devops-github' , url: 'https://github.com/itzelmun/cgic.git', branch: 'main'
             }
 	 	}
-
 		stage('Static Code Analysis') {
       		steps {
         		withSonarQubeEnv('sonarqube') {
