@@ -7,7 +7,7 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
 #COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
-ADD ./cgic.sql /var/lib/mysql/cgic.sql
+COPY ./cgic.sql /var/lib/mysqld/cgic.sql
 
 
 # Ejecutar el comando para importar el archivo cgic.sql
@@ -37,10 +37,6 @@ ENV MYSQL_DATABASE=cgic
 #COPY point.sh /script/
 #WORKDIR /script
 #CMD ["/bin/sh", "./point.sh"]
-
-# Reiniciar el servicio de Apache
-RUN systemctl start mysql
-RUN systemctl apache2 restart
 
 # Exponer el puerto 80 (puedes cambiarlo si es necesario)
 EXPOSE 80
