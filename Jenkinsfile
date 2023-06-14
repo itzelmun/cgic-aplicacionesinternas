@@ -14,9 +14,10 @@ pipeline {
 	stages {
 		stage('Chechout Source'){
 	  		  steps {
-                git credentialsId: 'devops-github' , url: 'https://github.com/itzelmun/cgic.git', branch: 'main'
+                git credentialsId: 'devops-github' , url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch: 'main'
             }
 	 	}
+
 		stage('Static Code Analysis') {
       		steps {
         		withSonarQubeEnv('sonarqube') {
@@ -145,6 +146,7 @@ pipeline {
        					{}
 					}
 				}
+
 				sshagent(['sshsanchez']) {
 			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/cgic-aplicaciones/'
       				script{
