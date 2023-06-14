@@ -25,7 +25,23 @@ ADD ./cgic.sql /var/lib/mysql/cgic.sql
 #ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
 # Comando para ejecutar el dump.sql al iniciar el contenedor
 #CMD ["mysqld"]
+# Definimos las variables de entorno para configurar la base de datos
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=cgic
 
+# Si necesitas configurar más variables de entorno, puedes hacerlo aquí
+
+# Opcional: si deseas cambiar el puerto de MySQL, puedes descomentar la siguiente línea
+# EXPOSE 3306
+
+# Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
+# COPY my.cnf /etc/mysql/conf.d/my.cnf
+
+# Opcional: si necesitas instalar alguna dependencia adicional, puedes hacerlo utilizando apt-get o apt
+
+# Iniciamos el contenedor ejecutando el script de inicialización de MySQL
+# Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql
+CMD ["mysqld"]
 #Ejecuta script para dumpeo
 #COPY point.sh /script/
 #WORKDIR /script
