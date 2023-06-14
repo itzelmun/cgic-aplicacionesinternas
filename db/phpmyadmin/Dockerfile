@@ -39,7 +39,8 @@ ENV MYSQL_DATABASE=cgic
 #CMD ["/bin/sh", "./point.sh"]
 
 # Reiniciar el servicio de Apache
-#RUN service apache2 restart
+RUN service mysql start
+RUN service apache2 restart
 
 # Exponer el puerto 80 (puedes cambiarlo si es necesario)
 EXPOSE 80
