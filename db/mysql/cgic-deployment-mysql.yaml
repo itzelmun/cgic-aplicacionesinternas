@@ -17,6 +17,8 @@ spec:
         - name: cgic-mysql
           image: mariadb:10.3.13
           imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
           env:
             - name: DB_HOST
               value: localhost
@@ -31,22 +33,7 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
-          ports:
-            - containerPort: 3306
-              name: cgic-mysql
-          volumeMounts:
-            - name: cgic-mysql-data
-              mountPath: /docker-entrypoint-initdb.d/cgic.sql
-              subPath: cgic.sql
-      volumes:
-        - name: cgic-mysql-data
-          persistentVolumeClaim:
-            claimName: cgic-mysql-data-disk
-          resources:
-            requests:
-              storage: 10Gi
-            limits:
-              storage: 20Gi
+          
 
 
 
