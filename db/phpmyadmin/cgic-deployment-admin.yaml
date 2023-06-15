@@ -23,14 +23,14 @@ spec:
             - name: PMA_HOST
               value: cgic-mysql-svc
             - name: PMA_PASSWORD
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           volumeMounts:
             - name: sessions
               mountPath: /sessions
