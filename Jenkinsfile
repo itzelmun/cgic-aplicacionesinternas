@@ -149,17 +149,6 @@ pipeline {
 				}
 
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no job.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f job.yaml --kubeconfig=/home/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment db-migration-job -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-						}catch(error)
-       					{}
-					}
-				}
-
-				sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
@@ -191,6 +180,17 @@ pipeline {
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
+       					{}
+					}
+				}
+				
+				sshagent(['sshsanchez']) {
+			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no job.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+      				script{
+       	 				try{
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f job.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment db-migration-job -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+						}catch(error)
        					{}
 					}
 				}
