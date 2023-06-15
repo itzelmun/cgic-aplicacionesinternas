@@ -28,7 +28,7 @@ ENV MYSQL_USER=wcgic
 ENV MYSQL_PASSWORD=4TcCF
 
 # Ejecuta el comando para importar el archivo cgic.sql
-RUN /bin/bash -c 'mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /docker-entrypoint-initdb.d/cgic.sql'
+RUN mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /docker-entrypoint-initdb.d/cgic.sql
 
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
 # COPY my.cnf /etc/mysql/conf.d/my.cnf
