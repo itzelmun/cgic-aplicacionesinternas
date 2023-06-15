@@ -25,7 +25,6 @@ ENV MYSQL_DATABASE=cgic
 ENV MYSQL_USER=wcgic
 ENV MYSQL_PASSWORD=4TcCF
 
-
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
 # COPY my.cnf /etc/mysql/conf.d/my.cnf
 
