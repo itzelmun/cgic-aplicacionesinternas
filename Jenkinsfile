@@ -127,15 +127,7 @@ pipeline {
        					{}
 					}
 				}
-				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no persistent-volumen.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f persistent-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
+			
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-secret-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
