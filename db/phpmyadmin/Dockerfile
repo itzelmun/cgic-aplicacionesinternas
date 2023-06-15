@@ -20,10 +20,15 @@ COPY ./cgic.sql /docker-entrypoint-initdb.d/
 #ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
 
 # Definimos las variables de entorno para configurar la base de datos
+ENV DB_HOST=localhost
+ENV db_port=3306
 ENV MYSQL_ROOT_PASSWORD=rootpassword
 ENV MYSQL_DATABASE=cgic
 ENV MYSQL_USER=wcgic
 ENV MYSQL_PASSWORD=4TcCF
+
+# Ejecuta el comando para importar el archivo cgic.sql
+RUN mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /docker-entrypoint-initdb.d/cgic.sql
 
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
 # COPY my.cnf /etc/mysql/conf.d/my.cnf
