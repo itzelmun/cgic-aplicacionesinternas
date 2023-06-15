@@ -19,13 +19,13 @@ spec:
           args:
           - "mysql"
           - "-h"
-          - "localhost"
+          - "$(DB_HOST)"
           - "-P"
           - "3306"
           - "-u"
-          - "wcgic"
-          - "-p4TcCF"
-          - "cgic"
+          - "$(MYSQL_USER)"
+          - "-p$(MYSQL_PASSWORD)"
+          - "$(MYSQL_DATABASE)"
           - "<"
           - "/home/digesetuser/cgic.sql"
           imagePullPolicy: Always
