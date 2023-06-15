@@ -9,7 +9,7 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 #COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
 COPY ./cgic.sql /docker-entrypoint-initdb.d/
 
-
+RUN apt-get install -y dash
 # Ejecutar el comando para importar el archivo cgic.sql
 #RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
 #CMD ["sh", "-c", "exec mysql -uwcgic -p4TcCF --init-command=\"SET SESSION FOREIGN_KEY_CHECKS=0\" < /docker-entrypoint-initdb.d/cgic.sql"]
