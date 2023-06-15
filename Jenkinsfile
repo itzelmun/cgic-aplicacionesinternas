@@ -185,7 +185,7 @@ pipeline {
 				}
 				
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no job.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no job.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f job.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -194,7 +194,7 @@ pipeline {
        					{}
 					}
 				}
-				
+
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
