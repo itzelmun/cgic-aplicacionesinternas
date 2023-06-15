@@ -27,10 +27,6 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: DB_PASS
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
           volumeMounts:
             - name: sessions
               mountPath: /sessions

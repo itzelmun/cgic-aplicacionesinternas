@@ -33,6 +33,7 @@ spec:
                   key: DB_PASS
           ports:
             - containerPort: 3306
+              name: cgic-mysql
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
