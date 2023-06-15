@@ -16,7 +16,18 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.7.25
-          command: ["sh", "-c", "mysql -h localhost -P 3306 -u wcgic -p4TcCF cgic < /home/digesetuser/cgic.sql"]
+          args:
+          - "mysql"
+          - "-h"
+          - "localhost"
+          - "-P"
+          - "3306"
+          - "-u"
+          - "wcgic"
+          - "-p4TcCF"
+          - "cgic"
+          - "<"
+          - "/home/digesetuser/cgic.sql"
           imagePullPolicy: Always
           env:
             - name: DB_HOST
