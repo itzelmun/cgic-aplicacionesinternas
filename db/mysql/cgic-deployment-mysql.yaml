@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cgic-mysql
-          image: mariadb:10.3.13
+          image: mysql:5.1.41
           imagePullPolicy: Always
           ports:
             - containerPort: 3306
