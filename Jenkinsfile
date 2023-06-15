@@ -177,8 +177,8 @@ pipeline {
 			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
           				}catch(error)
        					{}
 					}
