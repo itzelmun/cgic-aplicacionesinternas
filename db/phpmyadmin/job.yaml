@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-job
+  namespace: cgic-aplicaciones
+spec:
+  template:
+    spec:
+      containers:
+      - name: db-migration
+        image: mysql:5.7.25
+        command: ["sh", "-c", "mysql -h localhost -P 3306 -u wcgic -p4TcCF cgic < /var/lib/mysql/cgic.sql"]
+      restartPolicy: Never

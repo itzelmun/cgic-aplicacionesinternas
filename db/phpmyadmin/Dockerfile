@@ -6,10 +6,8 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 ##COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 
 # Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
-#COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
-COPY ./cgic.sql /docker-entrypoint-initdb.d/
-RUN apt-get install -y dash
-RUN apt-get install -y mysql-client
+COPY ./cgic.sql /var/lib/mysql/cgic.sql
+#COPY ./cgic.sql /docker-entrypoint-initdb.d/
 
 # Ejecutar el comando para importar el archivo cgic.sql
 #RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
@@ -21,15 +19,15 @@ RUN apt-get install -y mysql-client
 #ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
 
 # Definimos las variables de entorno para configurar la base de datos
-ENV DB_HOST=localhost
-ENV db_port=3306
-ENV MYSQL_ROOT_PASSWORD=rootpassword
-ENV MYSQL_DATABASE=cgic
-ENV MYSQL_USER=wcgic
-ENV MYSQL_PASSWORD=4TcCF
+#ENV DB_HOST=localhost
+#ENV db_port=3306
+#ENV MYSQL_ROOT_PASSWORD=rootpassword
+#ENV MYSQL_DATABASE=cgic
+#ENV MYSQL_USER=wcgic
+#ENV MYSQL_PASSWORD=4TcCF
 
 # Ejecuta el comando para importar el archivo cgic.sql
-RUN mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /docker-entrypoint-initdb.d/cgic.sql
+#RUN mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /docker-entrypoint-initdb.d/cgic.sql
 
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
 # COPY my.cnf /etc/mysql/conf.d/my.cnf
@@ -39,9 +37,11 @@ RUN mysql -h "$B_HOST" -P "$db_port" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQ
 #WORKDIR /script
 #CMD ["/bin/sh", "./point.sh"]
 
-# Exponer el puerto 80 (puedes cambiarlo si es necesario)
-EXPOSE 80
-
 # Iniciamos el contenedor ejecutando el script de inicialización de MySQL
 # Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql, ejecuta el dump.sql al iniciar el contenedor
-CMD ["mysqld"]
+#CMD ["mysqld"]
+RUN a2enmod rewrite
+RUN service apache2 restart
+
+# Exponer el puerto 80 (puedes cambiarlo si es necesario)
+EXPOSE 80
