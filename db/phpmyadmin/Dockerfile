@@ -7,7 +7,7 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
 #COPY ./cgic.sql /docker-entrypoint-initdb.d/cgic.sql
-COPY ./cgic.sql /var/lib/mysqld/cgic.sql
+COPY ./cgic.sql /docker-entrypoint-initdb.d/
 
 
 # Ejecutar el comando para importar el archivo cgic.sql
@@ -28,6 +28,8 @@ COPY ./cgic.sql /var/lib/mysqld/cgic.sql
 # Definimos las variables de entorno para configurar la base de datos
 ENV MYSQL_ROOT_PASSWORD=rootpassword
 ENV MYSQL_DATABASE=cgic
+ENV MYSQL_USER=wcgic
+ENV MYSQL_PASSWORD=4TcCF
 
 
 # Opcional: si deseas utilizar un archivo de configuración personalizado, puedes copiarlo dentro del contenedor
