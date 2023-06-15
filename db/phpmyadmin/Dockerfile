@@ -14,17 +14,11 @@ COPY ./cgic.sql /docker-entrypoint-initdb.d/
 #RUN service mysql start && mysql -uwcgic -p4TcCF --init-command="SET SESSION FOREIGN_KEY_CHECKS=0" < /docker-entrypoint-initdb.d/cgic.sql
 #CMD ["sh", "-c", "exec mysql -uwcgic -p4TcCF --init-command=\"SET SESSION FOREIGN_KEY_CHECKS=0\" < /docker-entrypoint-initdb.d/cgic.sql"]
 # Variables de entorno para configurar la base de datos
-#ENV MYSQL_DATABASE=nombre_de_la_base_de_datos
-#ENV MYSQL_USER=usuario
-#ENV MYSQL_PASSWORD=contrasena
-#ENV MYSQL_ROOT_PASSWORD=root_contrasena
-
 #ENV nombre_host=$_ENV['DB_HOST']
 #ENV usuario_bd=$_ENV['MYSQL_USER']
 #ENV contrasena_bd=$_ENV['MYSQL_PASSWORD']
 #ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
-# Comando para ejecutar el dump.sql al iniciar el contenedor
-#CMD ["mysqld"]
+
 # Definimos las variables de entorno para configurar la base de datos
 ENV MYSQL_ROOT_PASSWORD=rootpassword
 ENV MYSQL_DATABASE=cgic
@@ -44,5 +38,5 @@ ENV MYSQL_PASSWORD=4TcCF
 EXPOSE 80
 
 # Iniciamos el contenedor ejecutando el script de inicialización de MySQL
-# Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql
+# Esto creará las tablas y cargará los datos desde el archivo tu_basededatos.sql, ejecuta el dump.sql al iniciar el contenedor
 CMD ["mysqld"]
