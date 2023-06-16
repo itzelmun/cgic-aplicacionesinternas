@@ -16,18 +16,6 @@ spec:
       containers:
         - name: cgic-mysql
           image: mysql:5.7.25
-          args:
-          - "mysql"
-          - "-h"
-          - "$(DB_HOST)"
-          - "-P"
-          - "3306"
-          - "-u"
-          - "$(MYSQL_USER)"
-          - "-p$(MYSQL_PASSWORD)"
-          - "$(MYSQL_DATABASE)"
-          - "<"
-          - "/home/digesetuser/cgic.sql"
           imagePullPolicy: Always
           env:
             - name: DB_HOST
