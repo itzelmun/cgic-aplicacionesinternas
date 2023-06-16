@@ -143,7 +143,8 @@ pipeline {
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql cgic-aplicaciones/cgic-mysql:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl get pods -n cgic-aplicaciones | grep cgic-mysql | awk '{print $1}' --kubeconfig=/home/digesetuser/.kube/config"
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql cgic-mysql:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
 							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl exec -it cgic-mysql -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e "source /var/data/cgic.sql" --kubeconfig=/home/digesetuser/.kube/config'
 						}catch(error)
        					{}
