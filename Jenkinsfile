@@ -145,8 +145,18 @@ pipeline {
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql ${env.NAMESPACE}/${env.POD_NAME}:/var/data/cgic.sql -n ${env.NAMESPACE} --kubeconfig=/home/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl exec -it ${env.POD_NAME} -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e 'source /var/data/cgic.sql' --kubeconfig=/home/digesetuser/.kube/config"
+							def podName = sh(script: "kubectl get pods -n cgic-aplicaciones -o jsonpath='{.items[0].metadata.name}'", returnStdout: true).trim()
+                    		def podNameWithoutSuffix = podName =~ /(\w+)-\w+$/
+
+                    		if (podNameWithoutSuffix) {
+                        		def cleanPodName = podNameWithoutSuffix[0][1]
+                        		sh "kubectl cp cgic.sql cgic-aplicaciones/${cleanPodName}:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+                        		sh "kubectl exec -it ${cleanPodName} -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e 'source /var/data/cgic.sql' --kubeconfig=/home/digesetuser/.kube/config"
+                    			} else {
+                        		error "Failed to extract clean pod name"
+                    		}
+							//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql ${env.NAMESPACE}/${env.POD_NAME}:/var/data/cgic.sql -n ${env.NAMESPACE} --kubeconfig=/home/digesetuser/.kube/config"
+							//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl exec -it ${env.POD_NAME} -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e 'source /var/data/cgic.sql' --kubeconfig=/home/digesetuser/.kube/config"
 						}catch(error)
        					{}
 					}
