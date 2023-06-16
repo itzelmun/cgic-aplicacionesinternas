@@ -18,6 +18,7 @@ COPY ./cgic.sql /var/lib/mysql/cgic.sql
 #ENV contrasena_bd=$_ENV['MYSQL_PASSWORD']
 #ENV base_datos_nombre=$_ENV['MYSQL_DATABASE']
 
+
 # Definimos las variables de entorno para configurar la base de datos
 #ENV DB_HOST=localhost
 #ENV db_port=3306
