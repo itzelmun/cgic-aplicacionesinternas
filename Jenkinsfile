@@ -148,7 +148,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh 'cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser'
       				script{
        	 				try{
            					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql cgic-aplicaciones/cgic-mysql:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
