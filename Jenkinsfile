@@ -147,6 +147,16 @@ pipeline {
        					{}
 					}
 				}
+				sshagent(['sshsanchez']) {
+			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic.sql digesetuser@148.213.1.131:/home/digesetuser/"
+      				script{
+       	 				try{
+           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl cp /home/digesetuser/cgic.sql cgic-aplicaciones/cgic-mysql:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+							sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl exec -it cgic-mysql -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e "source /var/data/cgic.sql" --kubeconfig=/home/digesetuser/.kube/config'
+						}catch(error)
+       					{}
+					}
+				}
 
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
@@ -184,8 +194,6 @@ pipeline {
 					}
 				}
 				
-				
-
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{

@@ -6,7 +6,7 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 ##COPY ./mysqld.cnf /etc/mysql/mysql.conf.d/
 
 # Copiar el archivo cgic.sql a la ubicación /tmp/cgic.sql dentro del contenedor
-COPY ./cgic.sql /var/lib/mysql/cgic.sql
+#COPY ./cgic.sql /var/lib/mysql/cgic.sql
 #COPY ./cgic.sql /docker-entrypoint-initdb.d/
 
 # Ejecutar el comando para importar el archivo cgic.sql
