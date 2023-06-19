@@ -5064,3 +5064,44 @@ data:
     (16, 'Angelica', 'Montero', 'ejecutivo', 'ejecutivo', 'ejecutivo', '02/09/2017'),
     (18, 'Mariela', 'Rosales', 'mariela', 'mariela', 'subgerente', '06/09/2017'),
     (21, 'daniel', 'vazquez', 'daniel', '12345', 'solicitud', '20/09/2017');
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: cgic-aplicaciones
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.5
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: rootpassword
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: sql-scripts
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data-dj
+        - name: sql-scripts
+          configMap:
+            name: import-sql-scripts

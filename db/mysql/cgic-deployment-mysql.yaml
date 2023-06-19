@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: cgic-mysql
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
