@@ -1,55 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgic-mysql
+  name: mysql-deployment
   namespace: cgic-aplicaciones
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cgic-mysql
+      app: mysql
   template:
     metadata:
       labels:
-        app: cgic-mysql
+        app: mysql
     spec:
       containers:
-        - name: cgic-mysql
-          image: mysql:5.7.25
-          imagePullPolicy: Always
+        - name: mysql
+          image: mysql:latest
           env:
-            - name: DB_HOST
-              value: localhost
             - name: MYSQL_ROOT_PASSWORD
-              value: rootpassword
-            - name: MYSQL_DATABASE
-              value: cgic
-            - name: MYSQL_USER
-              value: wcgic
-            - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: DB_PASS
+                  key: rootpassword
           ports:
             - containerPort: 3306
-              name: cgic-mysql
+              name: mysql
           volumeMounts:
-            - name: mysql-persistent-storage
-              mountPath: /var/data
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: sql-scripts
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
-        - name: mysql-persistent-storage
+        - name: mysql-data
           persistentVolumeClaim:
-            claimName: mysql-pvc
-          
-
-
-
-
-
-
-
-
-
-
-
+            claimName: mysql-data-dj
+        - name: sql-scripts
+          configMap:
+            name: import-sql-scripts
