@@ -140,6 +140,7 @@ pipeline {
 					}
 				}
 
+			
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-configmap.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
@@ -150,6 +151,7 @@ pipeline {
 					}
 				}
 				
+
 				/*
 				sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
