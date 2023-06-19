@@ -188,7 +188,7 @@ pipeline {
 					}
 				}
 			*/
-				sshagent(['sshsanchez']) {
+				/*sshagent(['sshsanchez']) {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
@@ -197,7 +197,7 @@ pipeline {
        					{}
 					}
 				}
-		
+		*/
 			}		
 		}
 
