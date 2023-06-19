@@ -145,7 +145,7 @@ pipeline {
 			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-configmap.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-configmap.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-configmap.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
