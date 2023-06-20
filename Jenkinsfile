@@ -140,7 +140,7 @@ pipeline {
 				}
 				
 				sshagent(['sshsanchez']) {
-			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"

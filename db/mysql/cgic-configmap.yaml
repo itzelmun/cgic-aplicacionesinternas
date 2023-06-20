@@ -13,18 +13,6 @@ data:
 
     SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-    /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-    /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-    /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-    /*!40101 SET NAMES utf8 */;
-    --
-    -- Database: `cgic`
-    --
-    -- --------------------------------------------------------
-    --
-    -- Table structure for table `agenda`
-    --
-
     CREATE TABLE IF NOT EXISTS `agenda` (
       `id` bigint(20) NOT NULL AUTO_INCREMENT,
       `titulo` varchar(255) NOT NULL DEFAULT '',
@@ -34,10 +22,6 @@ data:
       `url` varchar(255) NOT NULL DEFAULT '',
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
-
-    --
-    -- Dumping data for table `agenda`
-    --
 
     INSERT INTO `agenda` (`id`, `titulo`, `info`, `fechaI`, `fechaT`, `url`) VALUES
     (27, 'C O N V O C A T O R I A - FRABA 12-2011', 'La Universidad de Colima, a través del fideicomiso\r\n<b>FONDO RAMON ÁLVAREZ-BUYLLA DE ALDANA,\r\n\r\nC  O  N  V  O  C  A</b>\r\n\r\nA profesores - investigadores de tiempo completo (PTC) de esta casa de estudios a presentar propuestas de investigación que correspondan a las líneas de generación y aplicación del conocimiento (LGAC) de interés de las dependencias de educación superior (DES) y sus cuerpos académicos (CA).\r\n\r\nLas propuestas deberán sujetarse a las bases.\r\n\r\nEl listado de proyectos aprobados se publicará en el periódico "El Comentario" y el sitio WEB de la Universidad de Colima quince días después de concluida la evaluación.\r\n\r\nLa fecha límite para la presentación de proyectos es el 30 de Noviembre de 2010.\r\n\r\nPARA INFORMACIÓN ADICIONAL: Coordinación General de Investigación Científica de la Universidad de Colima. \r\nAv. Gonzalo de Sandoval 444, Colima, Col. \r\nTEL: 316 1125 EXT. 40001. \r\ne-mail: cgic@ucol.mx.\r\n', '2010-10-22', '2010-11-30', 'http://www.ucol.mx/acerca/coordinaciones/cgic/cgic/pdf/FRABA_CONV12.pdf'),
@@ -57,12 +41,9 @@ data:
     (28, 'Convocatoria CIENCIA BASICA', 'CONACYT', '2007-11-20', '2007-12-30', 'http://www.conacyt.mx/Fondos/Sectoriales/SEP/SEP-CONACYT/SEP-CONACYT_ConvocatoriaAbierta.html'),
     (29, 'Informe 2007', 'Presentacion Power Point del Informe 2007', '2007-11-29', '2008-11-29', 'cgic/pdf/INFORME2007.ppt');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `articulos`
-    --
-
+    
+  cgic2.sql: |
+    
     CREATE TABLE IF NOT EXISTS `articulos` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `fuente` varchar(20) NOT NULL,
@@ -79,9 +60,6 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=756 ;
 
-    --
-    -- Dumping data for table `articulos`
-    --
 
     INSERT INTO `articulos` (`id`, `fuente`, `titulo`, `autores`, `area`, `year`, `editorial`, `vigente`, `doi`, `comentarios`, `fechaInsert`, `fechaLastMod`) VALUES
     (1, 'SCOPUS', '	Exploring the Structure, Energetic, and Magnetic Properties of Neutral Small Lithium Clusters Doped with Yttrium: Supermagnetic Atom Research        \r\n        ', 'Mojica-Sánchez, J.P., Flores-Moreno, R., Pineda-Urbina, K., Gómez-Sandoval, Z.	        \r\n        ', 'biologia', 2018, 'ACS Omega, 3(9), pp. 11252-11261.\r\n        ', 0, '', '        \r\n        ', '2019-03-21', '0000-00-00'),
@@ -840,11 +818,7 @@ data:
     (754, 'SCOPUS', 'Multiple Composite Scenarios: A Game-Based Methodology for the Prevention of Mental Disorders', 'Lepe-Salazar, F., Salgado-Torres, S.', 'humanidades', 2022, 'Entertainment Computing, 44, art. no. 100519.', 1, '', '', '2022-09-13', '0000-00-00'),
     (755, 'SCOPUS', 'Mental health impact by COVID-19 in hospitalized patients sample in Mexico City', 'Lucía-Verónica, M.-P., Rosa-Elda, B.-C., Gustavo-Esteban, L.-Z., (...), Yanet, C.-Á.N., Saúl, J.-J.', 'medicina', 2022, 'Anales de Psicologia, 38(3), pp. 448-457.', 1, '', '', '2022-09-13', '0000-00-00');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `auto`
-    --
+  cgic3.sql: |
 
     CREATE TABLE IF NOT EXISTS `auto` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -861,9 +835,6 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
 
-    --
-    -- Dumping data for table `auto`
-    --
 
     INSERT INTO `auto` (`id`, `marca`, `modelo`, `ano`, `tipo`, `color`, `pais`, `eqQuema`, `eqFaros`, `eqRines`, `comentarios`) VALUES
     (43, 'Honda', 'CRV', 2016, 'Hatch Back', 'Gris', 'Japon', 1, 1, 1, '   Es una SUV   '),
@@ -878,11 +849,7 @@ data:
     (74, 'jeep', 'barbie', 1992, 'Coupe', 'rosachingamelav', 'Estados Unidos', 0, 1, 1, 'es el jeep de barbie de la playa '),
     (78, 'Mazda', 'CX5', 2017, 'Hatch Back', 'Rojo', 'Japon', 1, 0, 1, 'Es la camioneta mÃ¡s popular de la marca');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `conacytproyectos`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `conacytproyectos` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -894,18 +861,11 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
-    --
-    -- Dumping data for table `conacytproyectos`
-    --
-
+   
     INSERT INTO `conacytproyectos` (`id`, `fuente_financiamiento`, `nombre_responsable`, `concepto`, `ano`, `monto`) VALUES
     (1, '438100-K0201-B', 'Dr.Javier Farias Larios', 'PRODUCCION SOSTENIBLE DE MELON (CUCUMIS MELO L .) EN EL ESTADO DE COLIMA.', '1999-2001', '133,045');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `convocatoria_fraba`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `convocatoria_fraba` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -914,9 +874,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
-    --
-    -- Dumping data for table `convocatoria_fraba`
-    --
+   
 
     INSERT INTO `convocatoria_fraba` (`id`, `no_convocatoria`, `fondos`) VALUES
     (1, 'I', ''),
@@ -933,11 +891,6 @@ data:
     (15, 'XII', 'FRABA'),
     (16, 'XIII', 'FRABA');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `entrevistas`
-    --
 
     CREATE TABLE IF NOT EXISTS `entrevistas` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -952,9 +905,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
-    --
-    -- Dumping data for table `entrevistas`
-    --
+   
 
     INSERT INTO `entrevistas` (`id`, `dependencia`, `area`, `grado`, `apellidos`, `nombres`, `introduccion`, `pdf`, `foto`) VALUES
     (1, 'Facultad de Ciencias', 'Físico Matemático y Ciencias de la Tierra', 'Dr.', 'Castaño Bernard', 'Carlos', '<p><strong>¿De dónde eres, dónde creciste?</strong></p>\r\n        	<p>Soy de la Ciudad de México. Crecí en el sur de esa ciudad, en el seno de una familia de intelectuales y personas de corte liberal. El primero en orden cronológico que cae claramente dentro de la segunda categoría es el abuelo paterno de mi abuela materna Elena: Vincenzo Lombardo – nacido en Settimo Torinese en 1836 – que llegó a México a principios del 1859. Él fue una figura determinante en la familia de mi abuela Elena.</p>', 'si/archivos/pdf/entrevistas/castano.pdf', 'imagenes/entrevistas/castano.jpg'),
@@ -966,11 +917,7 @@ data:
     (7, 'Facultad de Ciencias', 'Físico Matemático y Ciencias de la Tierra', 'Dr.', 'Terrero Escalante', 'César Augusto', '<p><strong>¿De dónde eres, dónde creciste?</strong></p>\r\n<p>Soy de la Habana, Cuba. Viví allí hasta los 19 años y luego me fui a estudiar a Moscú, antigua Unión Soviética durante los siguientes seis años. </p>\r\n<br />\r\n<p><strong>Si recuerdas, ¿a qué querías dedicarte cuando tenías alrededor de 10 años?</strong></p>\r\n<p>Me dividía entre dos profesiones salidas de mis lecturas: marinero y cosmonauta. </p>', 'si/archivos/pdf/entrevistas/terrero.pdf', 'imagenes/entrevistas/terrero.jpg'),
     (8, 'Facultad de Ciencias Químicas', 'Biología y Química', 'Dr.', 'Ibarra Junquera', 'Vrani', '<p><strong>¿De dónde eres, dónde creciste?</strong></p>\r\n<p>Nací en la ciudad de México un 12 de marzo de 1976. Al finalizar la secundaria me fui a vivir a Michoacán, donde estudié la preparatoria y la carrera; y es de Morelia de donde guardo mis recuerdos más entrañables de farra y amigos. </p>\r\n<br />\r\n<p><strong>Si recuerdas, ¿A qué querías dedicarte cuando tenías alrededor de 10 años?</strong></p>\r\n<p>Tuve toda clase de deseos, desde biología marina, veterinaria, aeronáutica, inventor…</p>', 'si/archivos/pdf/entrevistas/vrani.pdf', 'imagenes/entrevistas/ibarra.jpg');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `fecha_actualizacion`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `fecha_actualizacion` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -980,10 +927,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
-    --
-    -- Dumping data for table `fecha_actualizacion`
-    --
-
+    
     INSERT INTO `fecha_actualizacion` (`id`, `dia`, `mes`, `ano`) VALUES
     (1, 28, 5, 2014),
     (2, 28, 5, 2014),
@@ -1004,11 +948,8 @@ data:
     (17, 22, 9, 2014),
     (18, 26, 1, 2015);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `forofie`
-    --
+  cgic4.sql: |
+   
 
     CREATE TABLE IF NOT EXISTS `forofie` (
       `autor1` varchar(50) NOT NULL,
@@ -1027,9 +968,7 @@ data:
       KEY `clave` (`clave`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-    --
-    -- Dumping data for table `forofie`
-    --
+    
 
     INSERT INTO `forofie` (`autor1`, `autor2`, `autor3`, `asesor1`, `asesor2`, `asesor3`, `titulo`, `instituto`, `nivel`, `email`, `estatus`, `clave`, `grado`) VALUES
     ('Lupe', 'Julio', 'Noemi', 'No', 'No', 'No', 'Ninguno', '1', 1, 'jose_17g@hotmail.com', 2, 'FIE_1_2079', 0),
@@ -1118,11 +1057,6 @@ data:
     ('SÃ¡nchez Silva Ana Leticia ', 'Contreras Zepeda Ana Karina', 'Peregrina Maya Beatriz Aurora', 'Dr. JÃ³nas Larios Deniz', '', '', 'La homosexualidad como tema emergente para la form', '1', 6, 'anis_nanis12@hotmail.com', 0, 'FIE_6_6262', 1),
     ('Uno scr 95', '128 Super Europa', '128 Super Europa', 'Mensch', 'Circle of Elements', 'Mensch', 'zouave', '5', 1, 'Frizemipfriek@justafou.com', 0, 'FIE_1_7064', 0);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `foro_asistencia`
-    --
 
     CREATE TABLE IF NOT EXISTS `foro_asistencia` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1135,9 +1069,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
-    --
-    -- Dumping data for table `foro_asistencia`
-    --
+    
 
     INSERT INTO `foro_asistencia` (`id`, `nombre`, `grado`, `email`, `deposito`, `instituto`, `referencia`) VALUES
     (1, 'Lupe', 0, 'jose_17g@hotmail.com', 150, 1, 'Mov. 4, 2/3/2011'),
@@ -1223,21 +1155,13 @@ data:
     (81, 'norma rosa topete bonales', 1, 'norma_312605@hotmail.com', 200, 1, '7677104'),
     (82, 'alejandro enrique castro diaz', 1, 'norma_312605@hotmail.com', 200, 1, '7677105');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `foro_dep`
-    --
+  cgic5.sql: |
 
     CREATE TABLE IF NOT EXISTS `foro_dep` (
       `clave` int(11) NOT NULL AUTO_INCREMENT,
       `Nombre` varchar(50) NOT NULL,
       PRIMARY KEY (`clave`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
-    --
-    -- Dumping data for table `foro_dep`
-    --
 
     INSERT INTO `foro_dep` (`clave`, `Nombre`) VALUES
     (1, 'Universidad de Colima'),
@@ -1246,11 +1170,6 @@ data:
     (4, 'Tecnologico de Colima'),
     (5, 'Publico en General');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `fraba`
-    --
 
     CREATE TABLE IF NOT EXISTS `fraba` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1267,9 +1186,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=791 ;
 
-    --
-    -- Dumping data for table `fraba`
-    --
+
 
     INSERT INTO `fraba` (`id`, `referencia`, `convocatoria`, `ano`, `titulo`, `objetivo`, `grado`, `apellidos`, `nombres`, `correo`, `dependencia`) VALUES
     (1, '233/03', '04', NULL, 'Implantación de un sistema de reciclaje de residuos sólidos orgánicos en el campus universitario El Naranjo a partir de un estudio comparativos de diferentes técnicas de composteo y sus análisis costo-beneficio.', 'Implantar un sistema de reciclaje residuos sólidos orgánicos a partir de un estudio comparativo de técnicas de composteo aeróbico y anaeróbico, tomando en cuenta la que en menor tiempo y mayor facilidad de manejo requiera para determinar cual utilizar y analizar el costo-beneficio del sistema a aplicar de aucerdo a la técnica seleccionada.', 'LAE.', 'Torres Ríos', 'José Martín', 'delega1@ucol.mx', 'Facultad de Contabilidad y Administración Manzanillo'),
@@ -2070,11 +1987,9 @@ data:
     (789, '864/13', '14', 2013, 'EVOLUCION COSTERA A ESCALA ANUAL EN LA REGION DE COLIMA: PLAYA COCO', 'Evaluar la transformación costera en un tramo de la playa del Coco durante un año de estudio.', 'Dr.', 'Álvarez García', 'María del Carmen', 'malvarez1@ucol.mx', 'Centro Universitario de Investigaciones Oceanológicas (CEUNIVO)'),
     (790, '865/13', '14', 2013, 'IDENTIFICACIÓN MOLECULAR DE ENFERMEDADES DEL CULTIVO DE LA PAPAYA EN EL ESTADO DE COLIMA', 'Identificar molecularmente los agentes causales de las diferentes patologías que se presentan en las plantas de papaya del Estado de Colima', 'Dr.', 'Guzmán González', 'Salvador', 'sguzmangonzalezs@gmail.com', 'Facultad de Ciencias Biológicas y Agropecuarias');
 
-    -- --------------------------------------------------------
+  
+  cgic6.sql: |
 
-    --
-    -- Table structure for table `fraba_felix`
-    --
 
     CREATE TABLE IF NOT EXISTS `fraba_felix` (
       `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2088,10 +2003,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=490 ;
 
-    --
-    -- Dumping data for table `fraba_felix`
-    --
-
+  
     INSERT INTO `fraba_felix` (`id`, `ref`, `nombre`, `dependencia`, `titulo`, `objetivo`, `email`, `convocatoria`) VALUES
     (2, '327/05', 'Dr. Carlos Guillermo Onetti Percello', 'Centro Universitario de Investigaciones Biomedicas (CUIB)', 'PARTICIPACIÓN DE LOS CANALES DE POTASIO SENSIBLES AL ATP EN LA DIABETES EXPERIMENTAL EN NEURONAS DE HIPOCAMPO', 'ESTUDIAR LAS PROPIEDADES BIOFÍSICAS Y LA LSENSIBILIDAD A NUCLEÓTIDOS DE ADENOSINA DE LOS CANALES KATP EN NEURONAS DE HIPOCAMPO.EN UN MODELO EXPERIMENTAL DE DIABETES', 'cgonetti@cgic.ucol.mx', '6'),
     (3, '328/05', 'Dr. Humberto Cruzblanca Hernández', 'Centro Universitario de Investigaciones Biomedicas (CUIB)', 'REGULACIÓN DEL RECTIFICADOR TARDÍO IKV POR RECEPTORES Y FARMACOS, EN NEURONAS TRANSFECTADAS CON GENES MUTADOS DE KV2.1 Y KV2.2', 'EL OBJETIVO PRINCIPAL DEL PROYECTO ES ESTUDIAR LA REGULACIÓN POR RECEPTORES Y FÁRMACOS DE LA CORRIENTE DE K+ RECTIFICADOR TARDÍO IKV, EN NEURONAS TRANSFECTADAS CON LOS DOMINANTES NEGATIVOS DE LAS SUBUNIDADES KV2.1 Y/O KV2.2.', 'cruzblan@cgic.ucol.mx', '6'),
@@ -2571,11 +2483,7 @@ data:
     (488, '770/11', 'Dr. García Márquez Luis Jorge', 'Centro Universitario de Investigaciones y Desarrollo Agropecuario (CUIDA)', 'ESTUDIO DE LAS ENFERMEDADES PARASITARIAS DE LOS TLACUACHES (DIDELPHIS VIRGINIANA) EN EL ESTADO DE COLIMA, MÉXICO.\r\n', '"Objetivo General\r\n\r\n•	Determinar la frecuencia y riqueza de especies parásitos en tlacuaches (Didelphis virginiana) en el estado de Colima, México.\r\n\r\nObjetivos particulares\r\n\r\n•	Aplicar técnicas para la recolección, identificación y curación de parásitos de lo"\r\n', 'ljgm_cmv@hotmail.com', '15'),
     (489, '771/11', 'Dr. Guzmán González Salvador', 'Facultad de Ciencias Biológicas y Agropecuarias', 'RESISTENCIA VIRAL Y CARACTERIZACIÓN MOLECULAR DE PLANTAS DE PAPAYA TRANSFORMADAS CON EL GEN CP DEL VIRUS DE LA MANCHA ANULAR DE LA PAPAYA\r\n', 'Evaluar la respuesta de plantas de papaya transformadas con el gen cp del virus de la mancha anular de la papaya y la presencia de los genes marcadores, promotores y del gen viral en la planta.\r\n', 'sguzman@ucol.mx', '15');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `investigadores`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `investigadores` (
       `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -2591,9 +2499,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=261 ;
 
-    --
-    -- Dumping data for table `investigadores`
-    --
+   
 
     INSERT INTO `investigadores` (`id`, `investigador`, `area`, `nivel`, `correo`, `adscripcion`, `ciudad`, `telefono`, `udec`, `vigencia`) VALUES
     (1, 'M.C. Alvarez Cárdenas Omar', 'Ingeniería', '   ', 'xe1aom@ucol.mx', 'Facultad de Telemática', 'Colima', '312-3130216', 'U. de C.', '..'),
@@ -2764,11 +2670,9 @@ data:
     (259, 'Dr. Victor Hugo Castillo Topete', 'Ingeniería', 'Candidato', 'victor@ucol.mx', 'Facultad de Ingenieria Mecanica y Electrica', 'Coquimatlan Colima', '312 3161000', '', '2012 - 2014'),
     (260, 'M en C. Ciria Margarita Salazar C.', 'Humanidades y de la Conducta', 'Candidato', 'ciria6@ucol.mx', 'Facultad de Ciencias', 'Colima, Col.', '312 31 61000', '', '2012 - 2015');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `mensajes`
-    --
+   
+  cgic7.sql: |
+  
 
     CREATE TABLE IF NOT EXISTS `mensajes` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2781,20 +2685,14 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
-    --
-    -- Dumping data for table `mensajes`
-    --
+  
 
     INSERT INTO `mensajes` (`id`, `remitente`, `destinatario`, `fecha_envio`, `asunto`, `contenido`, `estatus`) VALUES
     (1, 'gerente', 'todos', '24/04/2015', 'del gerente para todos', 'este es el cuerpo del mensaje', ''),
     (2, 'subgerente', 'gerente', '24/04/2015', 'del subgerente para el gerente', 'cuerpo del mensaje', ''),
     (7, 'gerente', 'subgerente', '12/09/2017', 'dv', 'dv', '');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `noticias`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `noticias` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2805,9 +2703,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=67 ;
 
-    --
-    -- Dumping data for table `noticias`
-    --
+   
 
     INSERT INTO `noticias` (`id`, `introduccion`, `link`, `fecha`, `vigente`) VALUES
     (23, 'Convocatoria CANDECTI 2013 - Cartera Nacional de Demandas Científicas, Tecnológica y de Innovación  ', ' http://amectiac.mx/index.php/eventos/item/21-convocatoria-candecti?utm_source=twitterfeed&utm_medium=facebook ', '21 / 08 / 2013', 0),
@@ -2858,11 +2754,7 @@ data:
     (65, 'Becas de Movilidad entre Universidades Andaluzas e Iberoamericanas 2014 ', 'http://www.auip.org/index.php/es/becas-auip/681', '17 / 09 / 2014', 1),
     (66, 'Convocatorias Horizon 2020 de la Comisión Europea con financiamiento de CONACYT.', 'http://www.eshorizonte2020.es/', '22 / 09 / 2014', 1);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `proyecto`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `proyecto` (
       `id` int(20) NOT NULL AUTO_INCREMENT,
@@ -2876,9 +2768,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
-    --
-    -- Dumping data for table `proyecto`
-    --
+   
 
     INSERT INTO `proyecto` (`id`, `convenio`, `responsable`, `titulo`, `inicia`, `final`, `monto`, `apoyado`) VALUES
     (1, '29569N', 'Dr. Ramón Álvarez Buylla de  Aldana', 'NEUROPEPTIDOS EN EL CONTROL DEL SCN SOBRE LA HOMEOSTASIS DE LA GLUCOSA', '15/12/1998', '21/09/2003', '448,189', 1),
@@ -2905,11 +2795,7 @@ data:
     (22, '43446', 'Dr. Miguel Huerta Viera.', 'Efectos de los canabionoides (WIN 55,212-2) sobre la tension en musculo esqueletico.', '01/01/2004', '01/01/2007', '1,149,761', 4),
     (23, '43880', 'Dr. Juan Carlos Araiaza Garaygordobili', 'PELIGORSIDAD SISMICA EN EL ESTADO DE COLIMA: Estudio de la fuente, regionalización y microzonificiación sísmicas de las zonas urbanas de  Colima, Manzanillo y Tecomán.', '01/01/2004', '01/01/2007', '2,750,000', 4);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `ptcs`
-    --
+   
 
     CREATE TABLE IF NOT EXISTS `ptcs` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2945,9 +2831,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=143 ;
 
-    --
-    -- Dumping data for table `ptcs`
-    --
+   
 
     INSERT INTO `ptcs` (`id`, `fecha_captura`, `num_trabajador`, `grado`, `nombres`, `apellidos`, `genero`, `mail`, `tel_ext`, `dependencia`, `nivelsni`, `ingresosni`, `vigenciasni`, `produccion_cient`, `area`, `cuerpo_acad`, `lgac`, `webpage`, `rec_tec`, `tec_exp`, `proyectos_actuales`, `grado_ano`, `grado_instit`, `nombramiento`, `nombram_otro`, `promep`, `ingresoprom`, `vigenciaprom`, `foto`, `vigente`) VALUES
     (1, '41429.5971759259', 36, 'Doctorado', 'Armando', 'Alcántara Lomelí', 'Hombre', 'armandoal@ucol.mx', '3161161', 'Facultad de Arquitectura y Diseño', '1', '39083', '41639', 'Capitulo de libro - EL CLIMA? en Colaboración con Luis Gabriel Gómez Azpeitia y Alejandra Cárdenas Calzada. Para el libro ?Donde Habita la Violencia?, editado por Red Nacional de Investigación Urbana, 2011. Pp. 201 a 236. ISBN: 978-968-6934-29-8\r\nArtículo - HUMAN ADAPTIVE ABILITY IN SOCIAL WELFARE HOUSING IN RESPONSE TO ENVIRONMENTAL CONDITIONS OF A SPACE.  En colaboración con el M.A. Carlos Javier Esparza y el Dr. Adolfo Gómez Amador. Publicada en la memoria digital del PLEA 2012, Lima Perú,  Noviembre de 2012\r\nArtículo - ANALYSIS THERMO-HYGRIC OF OCCUPIED SOCIAL WELFARE HOUSING IN A WARM SUB-HUMID WEATHER.  En colaboración con el M.A. Carlos Javier Esparza y el Dr. Adolfo Gómez Amador. Publicada en la memoria digital del PLEA 2012, Lima Perú,  Noviembre de 2012\r\nArtículo - AIR COOLING SYSTEM, A CISTERN AS A HEAT SINK, USING THE INDIRECT EVAPORATIVE COOLING AND COLD SHADOW IN A WARM SUB HUMID WEATHER.  En colaboración con la M.A. Norma Cecilia Serrano y el Dr. Carlos Escobar. Publicada en la memoria digital del PLEA 2012, Lima Perú,  Noviembre de 2012\r\nTesis de doctorado - Percepción y preferencia térmica, en la determinación del confort térmico para edificios en climas cálidos, en proceso\r\nTesis de Maestria - Desempeño de una cisterna como sumidero de calor, en un sistema intercambiador de aire por ductos, en climas cálido sub húmedos, 2011\r\nTesis de maestria - Patrones de conducta del habitante de viviendas de interés social en función de los vanos, 2011\r\nTesis de maestría - Enfriamiento térmico por medio de la convección del aire, asistido con una cisterna en casa habitación, en proceso\r\nTesis de maestría - Análisis de la ventilación natural en espacios de transición de la vivienda tradicional de Adobe en Colima, en proceso\r\nTesis de licenciatura - Análisis de dispositivos de control solar en las viviendas de la ciudad de Colima y Villa de Alvarez 2012\r\n', 'humanidades', 'Arquitectura y Medioambiente UCOL-CA 25', 'Habitabilidad del espacio arquitectónico y Tecnologías apropiadas', 'VACIO', 'Data loggers\r\nMini estaciones climatológicas\r\nAnemómetros\r\nEstaciones de estrés termico\r\nDecibelimetros\r\nTúneles de viento\r\netc... algunos de estos equipos requieren de reparación o mantenimiento.     ', ' VACIO ', ' En este momento no. ', '2001', 'UNAM', 'Profesor titular B', 'VACIO', 'si', '38751', '41810', '', 1),
@@ -3081,11 +2965,7 @@ data:
     (140, '41430.3438078704', 6125, 'Doctorado', 'Rogelio', 'Zizumbo Villarreal', 'Hombre', 'rzizumbo@ucol.mx', '3123161135', 'Facultad de Ciencias', 'No pertenece', 'VACIO', 'VACIO', 'Zizumbo-Villarreal, Rogelio. 2012. EVALUACION DEL MODELO ENFOQUE TERRITORIAL DEL DESARROLLO RURAL: GESTION DE PROYECTOS Y SU IMPACTO EN EL DESARROLLO DE COMALA, COLIMA\r\nZizumbo-Villarreal, R.& Roja-Caldelas, R. I.2011. Assessment of a sustainable rural development model: best practices in Comala, Colima, Mexico', 'Sin área', 'No pertenezco a cuerpo académico', 'Medio Ambiente, Planeación, gestión y desarrollo territorial', 'VACIO', 'VACIO', 'VACIO', 'Evaluación del programa de reforestación del sistema de transporte de gas natural Manzanillo Guadalajara: Elaboración de guías técnico científicas de la fauna y cursos y talleres de educación ambiental. Fuente de financiamiento: Aportaciones de la iniciativa privada.', '2013', 'Universidad Autonoma de Baja California', 'Profesor asociado C', 'VACIO', 'Si', '41460', '42551', NULL, 1),
     (141, '41423.6447222222', 3338, 'Doctorado', 'Vyacheslav Moisseevitch', 'Zobin Peremanova', 'Hombre', 'vzobin@ucol.mx', '47205', 'Centro Universitario de Estudios e Investigacoines de Vulcanologia', '2', '34881', '42004', 'Zobin, V.M., Al-Amri, A.M., and Fnais, M. (2013). Seismicity associated with active, new-born, and re-awakening basaltic volcanoes: case review and the possible scenarios for the Harraat volcanic provinces, Saudi Arabia. Arab. J. Geosci. 6, 529-541. DOI: 10.1007/s12517-011-0379-3\r\nZobin, V.M., Tameguri, T., and Iguchi, M. (2013).  Quantification of the 1999 Vulcanian explosions at Sakurajima volcano, Japan from broadband seismic records. In: V.Zobin (ed) “Complex Monitoring of Volcanic Activity: Methods and Results”, Nova Science Publishers, Inc., New York, ISBN 978-1-62417-985-3. p. 1 -12\r\nZobin, V.M., Ramírez, J.J., Santiago, H., Alatorre, E.,  Navarro, C., and  Bretón, M. (2013). Resolution of different-scale deformation data measured at volcanoes and its importance for eruption monitoring: Volcán de Colima, México. In: V.Zobin (ed) “Complex Monitoring of Volcanic Activity: Methods and Results”, Nova Science Publishers, Inc., New York, ISBN 978-1-62417-985-3. p. 137-152\r\nZobin, V.M. (2013). Seismic signals associated with geothermal activity within volcanic environment. In: V.Zobin (ed) “Complex Monitoring of Volcanic Activity: Methods and Results”, Nova Science Publishers, Inc., New York, ISBN 978-1-62417-985-3. p. 171-188\r\nZobin, V.M. (2012). Introduction to Volcanic Seismology. 2nd edition, Elsevier, Amsterdam-New York-Tokyo. 482 p. ISBN-10: 044456375X; ISBN-13: 978-0444563750 \r\nV.Zobin (ed) “Complex Monitoring of Volcanic Activity: Methods and Results”, Nova Science Publishers, Inc., New York, 198 p. ISBN 978-1-62417-985-3', 'fisico', 'CA30', 'Estudios en Ciencias de la Tierra', 'VACIO', 'computadoras', 'sismogramas', '  No tengo  ', '1978', 'Academia de Ciencias Rusa', 'Profesor titular C', 'VACIO', 'si', '37104', '41485', 'imagenes/ptcs/Zobin.jpg', 1);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `publicaciones`
-    --
+    
 
     CREATE TABLE IF NOT EXISTS `publicaciones` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -3105,9 +2985,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
 
-    --
-    -- Dumping data for table `publicaciones`
-    --
+    
 
     INSERT INTO `publicaciones` (`id`, `ptc`, `tipo`, `autores`, `titulo`, `estatus`, `pais`, `revista`, `editorial`, `issn`, `ano`, `proposito`, `lgac`, `area`) VALUES
     (1, 'CRUZ MANJARREZ ADRIANA', 'Artículo arbitrado', 'Cruz-Manjarrez Adriana', 'VACIO', 'ACEPTADO', 'ALEMANIA', 'Diversities', 'UNESCO MAX PLANCK INSTITUTE', '2079-6595', '2013', 'Generación de conocimiento', '2', 'humanidades'),
@@ -3177,12 +3055,8 @@ data:
     (132, 'López-Lemus UA', 'Artículo arbitrado', 'López-Lemus UA, Vásquez C, Vázquez-Campuzano R, Valle-Reyes S, Guzmán-Bracho C, Araiza-Garaygordobil D, Rebolledo-Prudencio N, Delgado-Enciso I, Espinoza-Gómez F.', 'Dengue Virus Serotype 1 Non-Structural Protein NS5 Expression Interferes with HIV Replication in a CD4+ T-Cell Line.', 'PUBLICADO', 'MÉXICO', '', '', '', '2014', '', '', 'medicina'),
     (133, 'prueba', 'prueba', '', '', '', '', '', '', '', '', '', '', 'medicina');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `sniarticulos`
-    --
-
+ 
+cgic8.sql: |
     CREATE TABLE IF NOT EXISTS `sniarticulos` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `idArticulo` int(11) NOT NULL,
@@ -3190,9 +3064,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1072 ;
 
-    --
-    -- Dumping data for table `sniarticulos`
-    --
+    
 
     INSERT INTO `sniarticulos` (`id`, `idArticulo`, `idSni`) VALUES
     (1, 1, 238),
@@ -4259,11 +4131,9 @@ data:
     (1070, 754, 316),
     (1071, 755, 316);
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `sniBackup19feb2019`
-    --
+ 
+  cgic9.sql: |
+   
 
     CREATE TABLE IF NOT EXISTS `sniBackup19feb2019` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -4285,9 +4155,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=316 ;
 
-    --
-    -- Dumping data for table `sniBackup19feb2019`
-    --
+   
 
     INSERT INTO `sniBackup19feb2019` (`id`, `expediente`, `grado`, `nombre`, `apellido`, `area`, `nivelsni`, `vigencia`, `udec`, `mail`, `mailAlternativo`, `vigente`, `dependencia`, `perfilScopus`, `idScopus`, `comentarios`) VALUES
     (1, 0, 'Dra.', 'Maria Del Carmen', 'Alvarez Garcia', 'fisico', 'Candidato', '2015 - 2016', 0, 'malvarez1@ucol.mx', '', 0, '', '', '0', ''),
@@ -4590,11 +4458,7 @@ data:
     (314, 0, 'Dra.', 'Nelida Jeanette', 'Sánchez Ramos', 'humanidades', 'Candidato', '', 0, 'sanchez_nelida@ucol.mx', '', 1, 'Facultad de Letras y Comunicación', '', '', 'Falta nombramiento para definir vigencia'),
     (315, 0, 'Dra.', 'Karina', 'Orozco Rocha', 'humanidades', '1', '2019 - 2021', 0, '', '', 0, 'Facultad de Trabajo Social', '', '', 'Confirmar área. Recabar información restante. Postdoctorado. Correo alternativo k_orozco@hotmail.com');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `sniinvestigadores`
-    --
+    
 
     CREATE TABLE IF NOT EXISTS `sniinvestigadores` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -4620,9 +4484,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=425 ;
 
-    --
-    -- Dumping data for table `sniinvestigadores`
-    --
+    
 
     INSERT INTO `sniinvestigadores` (`id`, `noTrabajador`, `puesto`, `expediente`, `grado`, `nombre`, `apellido`, `area`, `nivelsni`, `vigenciaInicio`, `vigenciaFin`, `udec`, `mail`, `mailAlternativo`, `vigente`, `dependencia`, `perfilScopus`, `idScopus`, `comentarios`, `nombramiento`) VALUES
     (1, 0, '', 0, 'Dra.', 'Maria Del Carmen', 'Alvarez Garcia', 'fisico', 'Candidato', '2015 - 2016', 0, 0, 'malvarez1@ucol.mx', '', 0, '', '', '0', '', ''),
@@ -5027,11 +4889,9 @@ data:
     (423, 0, '...', 0, 'Dra.', 'Rocío', 'Zatarain Palacios', 'biologia', 'Candidato', '2023', 0, 0, '', '', 0, 'Facultad de Ciencias Químicas', '', '', '', ''),
     (424, 0, 'PTC', 163179, 'Dr.', 'José Luis', 'Álvarez Flores', 'ingenieria', 'Candidato', '2023', 2026, 0, 'alvarez_jose@ucol.mx', '', 1, 'Facultad de Ingeniería Mecánica y Eléctrica', '', '', '', 'nombramientos/lvarez Flores, José Luis (2023 - 2026).pdf');
 
-    -- --------------------------------------------------------
-
-    --
-    -- Table structure for table `usuarios`
-    --
+  
+  cgic10.sql: |
+  
 
     CREATE TABLE IF NOT EXISTS `usuarios` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -5044,9 +4904,7 @@ data:
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
-    --
-    -- Dumping data for table `usuarios`
-    --
+  
 
     INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `clave`, `tipo`, `fecha_alta`) VALUES
     (1, 'Enrique', 'Rosas', 'gerente', 'gerente', 'gerente', '19/02/2014'),
