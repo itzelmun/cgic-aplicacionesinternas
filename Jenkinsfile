@@ -110,12 +110,41 @@ pipeline {
 
 		stage('Correr POD MySQL') {
 		 	steps{
+
+				sshagent(['sshsanchez']) {
+			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-volumen.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+      				script{
+       	 				try{
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-volumen.yaml --kubeconfig=/home/digesetuser/.kube/config"
+          				}catch(error)
+       					{}
+					}
+				}
 		   		sshagent(['sshsanchez']) {
+			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-secret.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+      				script{
+       	 				try{
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-secret.yaml --kubeconfig=/home/digesetuser/.kube/config"
+          				}catch(error)
+       					{}
+					}
+				}
+				
+				sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+          				}catch(error)
+       					{}
+					}
+				}
+				sshagent(['sshsanchez']) {
+			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-service.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+      				script{
+       	 				try{
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
