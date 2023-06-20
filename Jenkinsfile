@@ -76,7 +76,7 @@ pipeline {
 		stage('Correr POD proyecto') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -86,7 +86,7 @@ pipeline {
 				}
                 
 				sshagent(['sshsanchez']) {
-					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+					sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -96,7 +96,7 @@ pipeline {
 					}
 				}
 				sshagent(['sshsanchez']) {
-					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+					sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -111,7 +111,7 @@ pipeline {
 		stage('Correr POD MySQL') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -128,7 +128,7 @@ pipeline {
 		stage('Correr POD phpmyadmin') {
 		 	steps{
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -137,7 +137,7 @@ pipeline {
 					}
 				}
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
@@ -148,7 +148,7 @@ pipeline {
 				}
 				
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "scp -r -o StrictHostKeyChecking=no yamls/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
