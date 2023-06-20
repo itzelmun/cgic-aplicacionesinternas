@@ -6,8 +6,7 @@ pipeline {
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
-		POD_NAME = "cgic-mysql"
-		NAMESPACE = "cgic-aplicaciones"
+		PROJECT_FOLDER = "cgic-aplicaciones"
 
 	}
 
@@ -77,30 +76,30 @@ pipeline {
 		stage('Correr POD proyecto') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-namespace-source.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-namespace-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
 				}
                 
 				sshagent(['sshsanchez']) {
-					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
            					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
 				}
 				sshagent(['sshsanchez']) {
-					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+					sh "cd sourcecode/yamls && scp -r -o StrictHostKeyChecking=no yamls/cgic-service-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
            				
           				}catch(error)
        					{}
@@ -112,92 +111,16 @@ pipeline {
 		stage('Correr POD MySQL') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
 				}
-				/*sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-volumen-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-volumen-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
-			
-				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-secret-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-secret-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
-
-				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-configmap.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-configmap.yaml --kubeconfig=/home/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
-				*/
-			/*
-				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-configmap.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-configmap.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
-				*/
-
-				/*
-				sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-							def podName = sh(script: "kubectl get pods -n cgic-aplicaciones -o jsonpath='{.items[0].metadata.name}'", returnStdout: true).trim()
-                    		def podNameWithoutSuffix = podName =~ /(\w+)-\w+$/
-
-                    		if (podNameWithoutSuffix) {
-                        		def cleanPodName = podNameWithoutSuffix[0][1]
-                        		sh "kubectl cp cgic.sql cgic-aplicaciones/${cleanPodName}:/var/data/cgic.sql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
-                        		sh "kubectl exec -it ${cleanPodName} -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e 'source /var/data/cgic.sql' --kubeconfig=/home/digesetuser/.kube/config"
-                    			} else {
-                        		error "Failed to extract clean pod name"
-                    		}
-							//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl cp cgic.sql ${env.NAMESPACE}/${env.POD_NAME}:/var/data/cgic.sql -n ${env.NAMESPACE} --kubeconfig=/home/digesetuser/.kube/config"
-							//sh "ssh digesetuser@148.213.1.131 microk8s.kubectl exec -it ${env.POD_NAME} -n cgic-aplicaciones -- mysql -u wcgic -p4TcCF cgic -e 'source /var/data/cgic.sql' --kubeconfig=/home/digesetuser/.kube/config"
-						}catch(error)
-       					{}
-					}
-				}
-			*/
-				/*sshagent(['sshsanchez']) {
-			 		sh "cd db/mysql && scp -r -o StrictHostKeyChecking=no cgic-service-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
-		*/
+				
 			}		
 		}
 
@@ -205,30 +128,30 @@ pipeline {
 		stage('Correr POD phpmyadmin') {
 		 	steps{
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-namespace-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
 				}
 		   		sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           					sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config'
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
 				}
 				
 				sshagent(['sshsanchez']) {
-			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
+			 		sh "cd db/phpmyadmin && scp -r -o StrictHostKeyChecking=no yamls/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f cgic-service-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}

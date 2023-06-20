@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: import-sql-scripts1
+  namespace: cgic-aplicaciones
+data:
+  cgic1.sql: |
+    {{ .Files.Get "cgic1.sql" | indent 4 }}
