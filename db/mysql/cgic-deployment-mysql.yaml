@@ -29,7 +29,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: DB_PASS
+                  key: password
           ports:
             - containerPort: 3306
               name: cgic-mysql
