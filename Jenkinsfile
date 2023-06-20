@@ -127,15 +127,7 @@ pipeline {
 
 		stage('Correr POD phpmyadmin') {
 		 	steps{
-				sshagent(['sshsanchez']) {
-			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-namespace-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
-      				script{
-       	 				try{
-           					sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
-          				}catch(error)
-       					{}
-					}
-				}
+				
 		   		sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
