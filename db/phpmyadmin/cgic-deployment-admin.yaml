@@ -26,7 +26,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: DB_PASS
+                  key: rootpassword
           volumeMounts:
             - name: sessions
               mountPath: /sessions
