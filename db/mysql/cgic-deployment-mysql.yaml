@@ -36,6 +36,6 @@ spec:
             claimName: cgic-mysql-pvc
         - name: cgic-sql-scripts
           configMap:
-            name: import-sql-scripts1
+            name: cgic-import-sql-scripts
 
 
