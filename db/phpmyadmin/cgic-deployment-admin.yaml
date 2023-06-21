@@ -22,11 +22,11 @@ spec:
           env:
             - name: PMA_HOST
               value: cgic-mysql-svc
-            - name: PMA_ROOT_PASSWORD
+            - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
-                  key: rootpassword
+                  key: password
           volumeMounts:
             - name: sessions
               mountPath: /sessions
