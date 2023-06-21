@@ -22,7 +22,7 @@ spec:
           env:
             - name: PMA_HOST
               value: cgic-mysql-svc
-            - name: PMA_PASSWORD
+            - name: PMA_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
