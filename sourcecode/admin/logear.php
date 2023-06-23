@@ -15,7 +15,7 @@
 	{
 		//include('conexion.php');
 		error_reporting(E_ALL);
-		session_register('Login');
+		session_register("Login");
 		$usuario=$_POST['usr'];
 		$contra=$_POST['clave'];
 		
