@@ -54,11 +54,11 @@ tr:nth-child(even){ background: #FFFFFF;}
 				else{ 
 					  $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 ORDER BY area ASC"; }
 					  				 
-					 include('conexion.php');
+					 include("conexion.php");
 					 
-					$consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
+					$consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
  
-	  while($registros = mysql_fetch_array($consulta))
+	  while($registros = mysqli_fetch_array($consulta))
 					 { 					
 					 	$grado	= $registros['grado'];
 						$nombre	= $registros['nombre'];
