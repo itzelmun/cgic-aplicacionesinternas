@@ -1,13 +1,8 @@
-FROM php:5.3.29-apache
+FROM pretzlaw/php:5.3-fpm
 COPY . /var/www/html/
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 #RUN a2enmod rewrite
-RUN apt-get update && apt-get install -y \
-    libmysqlclient-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN docker-php-ext-install mysql
-
 #RUN docker-php-ext-install mysql mysqli pdo pdo_mysql
 #RUN docker-php-ext-install mysqlnd
 #RUN docker-php-ext-install mysql 
