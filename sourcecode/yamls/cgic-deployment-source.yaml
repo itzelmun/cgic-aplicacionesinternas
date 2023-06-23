@@ -17,7 +17,7 @@ spec:
       containers:
         - name: cgic-aplicacion
           image: devopsucol/cgic-aplicaciones:cgic
-          imagePullPolicy: Always
+          imagePullPolicy: OnFailure
           ports:
             - containerPort: 80
               name: cgic-aplicacion
