@@ -27,6 +27,12 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: password
+            - name: MAX_EXECUTION_TIME
+              value: "5000"
+            - name: MEMORY_LIMIT
+              value: "10000K"
+            - name: UPLOAD_LIMIT
+              value: "10000K"
           volumeMounts:
             - name: sessions
               mountPath: /sessions
