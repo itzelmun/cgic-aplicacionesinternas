@@ -17,6 +17,18 @@ spec:
       containers:
         - name: cgic-aplicacion
           image: devopsucol/cgic-aplicaciones:cgic
+          env:
+            - name: DB_HOST
+              value: cgic-mysql-svc
+            - name: MYSQL_DATABASE
+              value: cgic
+            - name: MYSQL_USER
+              value: wcgic
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cgic-secret
+                  key: password
           imagePullPolicy: Always
           ports:
             - containerPort: 80
