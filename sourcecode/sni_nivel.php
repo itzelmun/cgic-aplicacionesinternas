@@ -56,9 +56,9 @@ tr:nth-child(even){ background: #FFFFFF;}
 					  				 
 					 include("conexion.php");
 					 
-					$consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+					$consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
  
-	  while($registros = mysqli_fetch_array($consulta))
+	  while($registros = mysql_fetch_array($consulta))
 					 { 					
 					 	$grado	= $registros['grado'];
 						$nombre	= $registros['nombre'];

@@ -9,13 +9,13 @@
 	$contrasena = $_ENV['MYSQL_PASSWORD'];
 	$bd = $_ENV['MYSQL_DATABASE'];
 
-	
+
 	//crear la conexión
-	$cnx = mysqli_connect($servidor, $usuario, $contrasena, $bd);
+	$cnx = mysql_connect($servidor, $usuario, $contrasena, $bd);
 	
 	//verificar si la conexión fue exitosa
 	if(!$cnx)
-		die("Error de conexion...".mysqli_connect_error());
+		die("Error de conexion...".mysql_connect_error());
 	else
 		//echo "Conexión exitosa!!!";
 ?>
