@@ -5,7 +5,7 @@ $usuario_bd = $_ENV['MYSQL_USER'];
 $contrasena_bd = $_ENV['MYSQL_PASSWORD'];
 $base_datos_nombre = $_ENV['MYSQL_DATABASE'];
 
-$conexion = new mysqli($nombre_host, $usuario_bd, $contrasena_bd, $base_datos_nombre);
+$conexion = new mysqli($nombre_host, $usuario_bd, $contrasena_bd);
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
