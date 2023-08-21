@@ -1,10 +1,8 @@
 <?php
-
-$nombre_host = getenv('MYSQL_HOST');
-$usuario_bd = getenv('MYSQL_USER');
-$contrasena_bd =getenv('MYSQL_PASSWORD');
-$base_datos_nombre = getenv('MYSQL_DATABASE');
-
+$nombre_host = 'localhost';
+$usuario_bd = 'wcgic';
+$contrasena_bd ='4TcCF';
+$base_datos_nombre = 'cgic';
 
 $conexion = mysqli_connect($nombre_host, $usuario_bd, $contrasena_bd, $base_datos_nombre);
 
@@ -15,8 +13,5 @@ if (!$conexion) {
 if (!mysqli_select_db($conexion, $base_datos_nombre)) {
     die("Error al seleccionar la base de datos: " . mysqli_error($conexion));
 }
-
-
-
 ?>
 
