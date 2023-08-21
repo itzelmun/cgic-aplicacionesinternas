@@ -11,11 +11,11 @@
 
 
 	//crear la conexión
-	$cnx = mysql_connect($servidor, $usuario, $contrasena, $bd);
+	$cnx = mysqli_connect($servidor, $usuario, $contrasena, $bd);
 	
 	//verificar si la conexión fue exitosa
 	if(!$cnx)
-		die("Error de conexion...".mysql_connect_error());
+		die("Error de conexion...".mysqli_connect_error());
 	else
 		//echo "Conexión exitosa!!!";
 ?>
