@@ -18,7 +18,7 @@ spec:
         - name: cgic-aplicacion
           image: devopsucol/cgic-aplicaciones:cgic
           env:
-            - name: DB_HOST
+            - name: MYSQL_HOST
               value: cgic-mysql-svc
             - name: MYSQL_DATABASE
               value: cgic

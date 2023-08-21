@@ -17,22 +17,8 @@ spec:
         - name: cgic-mysql
           image: mysql:5.5.62
           env:
-            - name: DB_HOST
-              value: localhost
-            - name: MYSQL_USER
-              value: wcgic
-            - name: MYSQL_DATABASE
-              value: cgic
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: password
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cgic-secret
-                  key: password
+              value: rootpassword
           ports:
             - containerPort: 3306
               name: cgic-mysql
