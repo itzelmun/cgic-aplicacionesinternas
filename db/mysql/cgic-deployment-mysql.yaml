@@ -28,14 +28,9 @@ spec:
           volumeMounts:
             - name: cgic-mysql-pv
               mountPath: /var/lib/mysql
-            - name: cgic-sql-scripts
-              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: cgic-mysql-pv
           persistentVolumeClaim:
             claimName: cgic-mysql-pvc
-        - name: cgic-sql-scripts
-          configMap:
-            name: cgic-import-sql-scripts
 
 
