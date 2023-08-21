@@ -54,7 +54,7 @@ tr:nth-child(even){ background: #FFFFFF;}
                                 else{
                                           $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 ORDER BY area ASC"; }
 
-                                         include('conexion.php');
+                                         include("conexion.php");
 
                                         $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
 

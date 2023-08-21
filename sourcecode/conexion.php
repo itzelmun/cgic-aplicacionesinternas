@@ -18,9 +18,6 @@ if (!mysqli_select_db($conexion, $base_datos_nombre)) {
 }
 
 
-#$conexion = mysqli_connect($nombre_host, $usuario_bd, $contrasena_bd) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al CONECTAR la base de datos.</center>");
-#mysqli_select_db($base_datos_nombre, $conexion) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al SELECCIONAR la base de datos.</center>");
-
 
 ?>
 
