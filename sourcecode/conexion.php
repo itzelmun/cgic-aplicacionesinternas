@@ -6,9 +6,20 @@ $contrasena_bd = $_ENV['MYSQL_PASSWORD'];
 $base_datos_nombre = $_ENV['MYSQL_DATABASE'];
 $puerto = $_ENV['DB_PORT']; // Asegúrate de definir DB_PORT en tus variables de entorno
 
-$conexion = mysqli_connect($nombre_host, $usuario_bd, $contrasena_bd) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al CONECTAR la base de datos.</center>");
 
-mysqli_select_db($base_datos_nombre, $conexion) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al SELECCIONAR la base de datos.</center>");
+$conexion = mysqli_connect($nombre_host, $usuario_bd, $contrasena_bd);
+
+if (!$conexion) {
+    die("Error de conexión: Ha ocurrido un error al CONECTAR la base de datos" . mysqli_error());
+}
+
+if (!mysqli_select_db($conexion, $base_datos_nombre)) {
+    die("Error al seleccionar la base de datos: " . mysqli_error($conexion));
+}
+
+
+#$conexion = mysqli_connect($nombre_host, $usuario_bd, $contrasena_bd) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al CONECTAR la base de datos.</center>");
+#mysqli_select_db($base_datos_nombre, $conexion) or die(mysqli_error()."<br/><br/><br/><center>ERROR: Ha ocurrido un error al SELECCIONAR la base de datos.</center>");
 
 
 ?>
