@@ -33,7 +33,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni='Candidato') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -135,7 +135,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=1) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -236,7 +236,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=2) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -338,7 +338,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=3) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
