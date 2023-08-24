@@ -48,7 +48,7 @@ pipeline {
 	    			}
 	   			}
 	  		}
-	 	} 
+	 	}
 
 	 	stage('Subir Imagen') {
 	  		environment {
@@ -62,7 +62,7 @@ pipeline {
 			 			}
 					}
 				}
-				
+
 				dir('db/phpmyadmin') {
 		 			script {
 						docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
@@ -72,7 +72,7 @@ pipeline {
 				}
 	    	}
       	}
-	  
+
 		stage('Correr POD proyecto') {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
@@ -84,7 +84,7 @@ pipeline {
        					{}
 					}
 				}
-                
+
 				sshagent(['sshsanchez']) {
 					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-deployment-source.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
@@ -100,12 +100,12 @@ pipeline {
       				script{
        	 				try{
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-service-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
-           				
+
           				}catch(error)
        					{}
 					}
 				}
-			 } 		
+			 }
 		}
 
 		stage('Correr POD MySQL') {
@@ -129,7 +129,6 @@ pipeline {
        					{}
 					}
 				}
-				
 				sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-deployment-mysql.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
@@ -149,14 +148,12 @@ pipeline {
        					{}
 					}
 				}
-				
-			}		
+			}
 		}
 
 
 		stage('Correr POD phpmyadmin') {
 		 	steps{
-				
 		   		sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-deployment-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
@@ -167,7 +164,6 @@ pipeline {
        					{}
 					}
 				}
-				
 				sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-service-admin.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
@@ -177,7 +173,7 @@ pipeline {
        					{}
 					}
 				}
-			}		
+			}
 		}
 
 	}
