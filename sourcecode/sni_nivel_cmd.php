@@ -1,6 +1,6 @@
 <?  include('conexion.php'); ?>
 
-
+<meta charset="UTF-8">
 <div id="accordion1" class="accordion">
 <!-- Inicia area 1 -->
         <div class="accordion-group" style="display: none;">
@@ -237,9 +237,9 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=2) ORDER BY apellido ASC";
 
-                                        $consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
-          while($registros = mysql_fetch_array($consulta))
+          while($registros = mysqli_fetch_array($consulta))
                                          {
                                                 $grado  = $registros['grado'];
                                                 $nombre = htmlentities($registros['nombre']);
@@ -249,7 +249,6 @@
                                                 $area   = $registros['area'];
                                                 //$nivel        = $registros['nivelsni'];
                                                 $vigencia = $registros['vigencia'];
-
                                          ?>
                                     <tr>
                                       <td valign="top" >
