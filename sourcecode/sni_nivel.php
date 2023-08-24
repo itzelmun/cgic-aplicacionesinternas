@@ -8,7 +8,7 @@ tr:nth-child(odd){ background: #CFE2CE;}
 tr:nth-child(even){ background: #FFFFFF;}
 </style>
     <h2 class="verde"><img src="imagenes/vineta.jpg" /><strong>SNI Nivel</strong></h2>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <div align="right"><p align="right"><strong><font color="#FD8431">Buscar Nivel</font></strong>
                                   <select style="display:inline; float:none; width:100px" name="nivel" onchange = "location.href='home-gral.php?opc=sni_nivel&res='+this.value" >
                                     <option selected> ... </option>

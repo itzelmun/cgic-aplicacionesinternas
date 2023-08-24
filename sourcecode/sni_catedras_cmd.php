@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="accordion1" class="accordion">
 <!-- Inicia area 1 -->
 	<div class="accordion-group" style="display: none;">
