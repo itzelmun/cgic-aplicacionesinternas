@@ -1,6 +1,5 @@
 <?  include('conexion.php'); ?>
 
-<meta charset="UTF-8">
 <div id="accordion1" class="accordion">
 <!-- Inicia area 1 -->
         <div class="accordion-group" style="display: none;">
@@ -34,7 +33,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni='Candidato') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -136,7 +135,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=1) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -237,7 +236,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=2) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -339,7 +338,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=3) ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($sql) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
