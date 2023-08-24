@@ -21,12 +21,12 @@ spec:
               value: rootpassword
           ports:
             - containerPort: 3306
-              name: cgic-mysql
+              name: cgic-mysql-pvc
           volumeMounts:
-            - name: cgic-mysql-pv
+            - name: cgic-mysql-pvc
               mountPath: /var/lib/mysql
       volumes:
-        - name: cgic-mysql-pv
+        - name: cgic-mysql-pvc
           persistentVolumeClaim:
             claimName: cgic-mysql-pvc
 
