@@ -35,7 +35,7 @@ if($nombre==NULL || $apellido==NULL || $usuario==NULL || $clave==NULL || $tipo==
 	}else{
 
 		$sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido', usuario='$usuario', clave='$clave', tipo='$tipo' WHERE id=$id";
-		$consulta = mysql_query($cnx, $sql);
+		$consulta = mysqli_query($cnx, $sql);
 		if($consulta){
 			echo "El usuario ha sido actualizado con éxito...";
 			echo "<a href='ver_usuarios.php'> Regresar </a>";

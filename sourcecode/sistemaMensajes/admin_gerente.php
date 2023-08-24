@@ -13,13 +13,11 @@ session_start();
 
 <body>
 
-<? switch($_SESSION['stipo']){ 
+<? switch($_SESSION['stipo']){
 		case "gerente": echo "<h1>Administración para Gerentes</h1>";
 			break;
-			
 		case "subjerente": echo "<h1>Administración para Subgerentes</h1>";
 			break;
-			
 		case "ejecutivo": echo "<h1>Administración para Ejecutivos</h1>";
 			break;
  } ?>

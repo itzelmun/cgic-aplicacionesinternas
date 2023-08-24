@@ -16,12 +16,11 @@
             			</td>
             			<td>
             				<strong>E-mail</strong>
-            			</td> 
+            			</td>
             			<!--<td>
             				<strong>Vigencia</strong>
             			</td> -->
         			</tr>
-                	
                     <tr>
                         <td valign="top" >Javier Franciso Alamilla Gonz&aacute;lez</td>
                         <td valign="top" bordercolor="#F5F5F5">Centro Universitario de Investigaciones Biom&eacute;dicas (CUIB)</td>

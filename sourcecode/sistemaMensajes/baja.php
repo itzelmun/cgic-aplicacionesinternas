@@ -24,7 +24,7 @@ include("conexion.php");
 $id = $_GET['id'];
 
 $sql = "DELETE FROM usuarios WHERE id=$id";
-$consulta = mysql_query($cnx, $sql);
+$consulta = mysqli_query($cnx, $sql);
 if($consulta){
 	echo "El usuario ha sido eliminado exitosamente....";
 	echo "<br /><a href='admin_gerente.php'> Regresar </a>";

@@ -27,7 +27,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='fisico') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -97,7 +97,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='biologia') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -168,7 +168,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='medicina') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -231,7 +231,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='humanidades') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -294,7 +294,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='sociales') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -364,7 +364,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='biotecnologia') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {
@@ -434,7 +434,7 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='ingenieria') ORDER BY apellido ASC";
 
-                                        $consulta = mysqli_query($cons) or die( "Error en query: $sql, el error  es: " . mysqli_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
           while($registros = mysqli_fetch_array($consulta))
                                          {

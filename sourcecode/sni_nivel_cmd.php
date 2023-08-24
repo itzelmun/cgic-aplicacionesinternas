@@ -34,9 +34,9 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni='Candidato') ORDER BY apellido ASC";
 
-                                        $consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
-          while($registros = mysql_fetch_array($consulta))
+          while($registros = mysqli_fetch_array($consulta))
                                          {
                                                 $grado  = $registros['grado'];
                                                 $nombre = htmlentities($registros['nombre']);
@@ -136,9 +136,9 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=1) ORDER BY apellido ASC";
 
-                                        $consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
-          while($registros = mysql_fetch_array($consulta))
+          while($registros = mysqli_fetch_array($consulta))
                                          {
                                                 $grado  = $registros['grado'];
                                                 $nombre = htmlentities($registros['nombre']);
@@ -339,9 +339,9 @@
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND nivelsni=3) ORDER BY apellido ASC";
 
-                                        $consulta = mysql_query($cons) or die( "Error en query: $sql, el error  es: " . mysql_error() );
+                                        $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($conexion) );
 
-          while($registros = mysql_fetch_array($consulta))
+          while($registros = mysqli_fetch_array($consulta))
                                          {
                                                 $grado  = $registros['grado'];
                                                 $nombre = htmlentities($registros['nombre']);
