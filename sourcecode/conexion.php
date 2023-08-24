@@ -13,5 +13,9 @@ if (!$conexion) {
 if (!mysqli_select_db($conexion, $base_datos_nombre)) {
     die("Error al seleccionar la base de datos: " . mysqli_error($cnx));
 }
+if (!mysqli_set_charset($conexion, "utf8mb4")) {
+    printf("Error loading character set utf8mb4: %s\n", mysqli_error($cnx));
+    exit();
+}
 ?>
 
