@@ -6,6 +6,9 @@ color:#FFFFFF;
 /*para alternar el color entre las filas*/
 tr:nth-child(odd){ background: #CFE2CE;}
 tr:nth-child(even){ background: #FFFFFF;}
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+?>
 </style>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

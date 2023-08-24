@@ -1,3 +1,7 @@
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+?>
+
 <div id="accordion1" class="accordion">
 <!-- Inicia area 1 -->
 	<div class="accordion-group" style="display: none;">
