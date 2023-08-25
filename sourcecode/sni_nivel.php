@@ -1,3 +1,6 @@
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+?>
 <style type="text/css">
 tr#titular{
 background:#2CA93C;
@@ -6,10 +9,8 @@ color:#FFFFFF;
 /*para alternar el color entre las filas*/
 tr:nth-child(odd){ background: #CFE2CE;}
 tr:nth-child(even){ background: #FFFFFF;}
-<?php
-header('Content-Type: text/html; charset=UTF-8');
-?>
 </style>
+
     <h2 class="verde"><img src="imagenes/vineta.jpg" /><strong>SNI Nivel</strong></h2>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <div align="right"><p align="right"><strong><font color="#FD8431">Buscar Nivel</font></strong>
