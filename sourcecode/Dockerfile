@@ -1,7 +1,7 @@
 FROM php:5.6-apache
 COPY . /var/www/html/
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY ./php.ini /usr/local/etc/php/php.ini
+COPY ./todo/php.ini /usr/local/etc/php/php.ini
 RUN a2enmod rewrite
 #RUN docker-php-ext-install mysql
 RUN service apache2 restart
