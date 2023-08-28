@@ -77,6 +77,7 @@ pipeline {
 		 	steps{
 		   		sshagent(['sshsanchez']) {
 			 		sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-namespace.yaml digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic.sql digesetuser@148.213.1.131:/home/digesetuser/${env.PROJECT_FOLDER}/yamls/"
       				script{
        	 				try{
 							sh "ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-namespace.yaml --kubeconfig=/home/digesetuser/.kube/config"
