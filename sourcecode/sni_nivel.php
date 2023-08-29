@@ -92,7 +92,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                                                              case "ingenieria":
                                                                              echo "Ingenier&iacute;a";
                                                                              break;
-
                                                                              }
 
                                                                              ?></td>
