@@ -30,6 +30,8 @@ else if($filtro == "tipo")
 	 $sql = "SELECT * FROM auto WHERE tipo LIKE '%$criterio%'";
 	
 //ejecutar la consulta
+mysqli_set_charset($conexion, "utf8");
+
 $consulta = mysqli_query($cnx, $sql);
 //cantidad de registros
 $registros = mysqli_num_rows($consulta);

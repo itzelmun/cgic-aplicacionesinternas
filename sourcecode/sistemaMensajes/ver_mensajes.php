@@ -55,6 +55,8 @@ switch($_SESSION['stipo']){
 		break;
 	
 	}
+	mysqli_set_charset($conexion, "utf8");
+
 $consulta = mysqli_query($cnx, $sql);
 
 $num_reg = mysqli_num_rows($consulta);

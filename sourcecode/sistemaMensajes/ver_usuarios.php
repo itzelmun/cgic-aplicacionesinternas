@@ -33,6 +33,7 @@ function confirmar(){
 include("conexion.php"); 
 
 $sql = "SELECT * FROM usuarios ORDER BY id DESC";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 
 ?>

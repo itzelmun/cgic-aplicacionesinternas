@@ -24,6 +24,8 @@ include "conexion.php"; //incluir la conexion
 	 $comentarios = $_POST['comentarios'];
 //definir la consulta SQL	
 $sql = "UPDATE auto SET marca='$marca', modelo='$modelo', ano='$ano', tipo='$tipo', color='$color', pais='$pais', eqQuema=$eqQuema, eqFaros=$eqFaros, eqRines=$eqRines, comentarios='$comentarios' WHERE id = $id";
+mysqli_set_charset($conexion, "utf8");
+
 //ejecutar la consulta
 $consulta = mysqli_query($cnx, $sql);
 

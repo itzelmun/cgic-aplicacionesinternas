@@ -14,6 +14,8 @@ include "conexion.php"; //incluir la conexión
 	$id = $_GET['id']; //recibir id del enlace
 	//definir consulta SQL
 	$sql = "SELECT * FROM auto WHERE id = $id";
+	mysqli_set_charset($conexion, "utf8");
+
 	$consulta = mysqli_query($cnx, $sql); //ejecutar consulta
 	//extraer los datos generados de la consulta
 	$fila = mysqli_fetch_array($consulta);

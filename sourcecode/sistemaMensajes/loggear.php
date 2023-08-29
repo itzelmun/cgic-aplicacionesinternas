@@ -19,6 +19,7 @@ $usuario = $_POST['usuario'];
 $clave = $_POST['clave'];
 //hacer la consulta a la BD para verificar si existe el usuario ingresado
 $sql = "SELECT * FROM usuarios WHERE usuario='$usuario' AND clave='$clave'";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 
 $result = mysqli_fetch_array($consulta);

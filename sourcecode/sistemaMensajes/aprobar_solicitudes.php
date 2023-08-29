@@ -33,6 +33,7 @@ function confirmar(){
 include("conexion.php"); 
 
 $sql = "SELECT * FROM usuarios WHERE tipo='solicitud'";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 
 ?>

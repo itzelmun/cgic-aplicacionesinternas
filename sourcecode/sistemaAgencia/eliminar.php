@@ -13,6 +13,8 @@ include "conexion.php";
 	$id = $_GET['id'];
 	
 	$sql = "DELETE FROM auto WHERE id = $id";
+	mysqli_set_charset($conexion, "utf8");
+
 	$consulta = mysqli_query($cnx, $sql);
 	if($consulta){
 		echo "<h2>El registro fue eliminado exitosamente!!!</h2>";

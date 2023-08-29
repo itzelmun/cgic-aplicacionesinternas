@@ -1,8 +1,3 @@
-<?php
-//header('Content-Type: text/html; charset=utf-8');
-//mb_internal_encoding("UTF-8");
-
-?>
 <style type="text/css">
 tr#titular{
 background:#2CA93C;
@@ -61,6 +56,7 @@ tr:nth-child(even){ background: #FFFFFF;}
                                           $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 ORDER BY area ASC"; }
 
                                          include("conexion.php");
+                                         mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))

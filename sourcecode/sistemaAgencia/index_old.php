@@ -53,6 +53,8 @@
 	include "conexion.php"; //incluir la conexion
 	//definir la consulta SQL
 	$sql = "SELECT * FROM auto";
+	mysqli_set_charset($conexion, "utf8");
+
 	//ejecutar la consulta
 	$consulta = mysqli_query($cnx, $sql);
 	//recopilar los datos

@@ -31,6 +31,7 @@ include("conexion.php");
 
 //hago la consulta a la BD para saber el número de solicitudes pendientes de aprobación
 $sql = "SELECT * FROM usuarios WHERE tipo='solicitud'";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 
 $result = mysqli_fetch_array($consulta);

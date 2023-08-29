@@ -48,6 +48,7 @@ if($destinatario=="elije" || $asunto==NULL || $contenido==NULL){
 	}else{
 	
 	$sql = "INSERT INTO mensajes (remitente, destinatario, fecha_envio, asunto, contenido) VALUES ('$tipo', '$destinatario', '$fecha_alta', '$asunto', '$contenido')";
+	mysqli_set_charset($conexion, "utf8");
 	$consulta = mysqli_query($cnx, $sql);
 	if($consulta){
 		echo "El mensaje ha sido enviado exitosamente. <br /><a href='admin_gerente.php?tipo=$tipo'>Regresar</a>";

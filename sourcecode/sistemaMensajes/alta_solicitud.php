@@ -27,6 +27,7 @@ if($nombre==NULL || $apellido==NULL || $usuario==NULL || $clave==NULL || $confir
 		}else{
 	
 	$sql = "INSERT INTO usuarios (nombre, apellido, usuario, clave, tipo, fecha_alta) VALUES ('$nombre', '$apellido', '$usuario', '$clave', 'solicitud', '$fecha_alta')";
+	mysqli_set_charset($conexion, "utf8");
 	$consulta = mysqli_query($cnx, $sql);
 	if($consulta){
 		echo "La solicitud fue hecha exitosamente, sólo falta la aprobación del gerente. <br /> Intenta acceder al sistema más tarde.<br /><a href='index.php'>Salir</a>";

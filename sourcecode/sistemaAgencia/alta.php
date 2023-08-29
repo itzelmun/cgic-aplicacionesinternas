@@ -24,6 +24,8 @@ include "conexion.php"; //incluir la conexion
 //definir la consulta SQL	
 $sql = "INSERT INTO auto (marca, modelo, ano, tipo, color, pais, eqQuema, eqFaros, eqRines, comentarios) VALUES ('$marca', '$modelo', $ano, '$tipo', '$color', '$pais', $eqQuema, $eqFaros, $eqRines, '$comentarios')";
 //ejecutar la consulta
+mysqli_set_charset($conexion, "utf8");
+
 $consulta = mysqli_query($cnx, $sql);
 
 if($consulta){//verificar si no hubo problemas

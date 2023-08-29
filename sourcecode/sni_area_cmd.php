@@ -28,7 +28,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='fisico') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -98,7 +98,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='biologia') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -169,7 +169,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='medicina') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -232,7 +232,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='humanidades') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -295,7 +295,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='sociales') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -365,7 +365,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='biotecnologia') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))
@@ -435,7 +435,7 @@ header('Content-Type: text/html; charset=UTF-8');
                     <?
 
                                           $cons = "SELECT * FROM sniinvestigadores WHERE (vigente=1 AND area='ingenieria') ORDER BY apellido ASC";
-
+                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
 
           while($registros = mysqli_fetch_array($consulta))

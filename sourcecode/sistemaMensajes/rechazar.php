@@ -27,6 +27,7 @@ include("conexion.php");
 $id = $_GET['id'];
 
 $sql = "DELETE FROM usuarios WHERE id='$id'";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 	if($consulta){
 		echo "La solicitud ha sido rechazada. <br /><a href='aprobar_solicitudes.php'>Regresar</a>";

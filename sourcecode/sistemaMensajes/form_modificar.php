@@ -29,6 +29,7 @@ $id = $_GET['id'];
 if(!isset($_GET['b'])){
 
 $sql = "SELECT * FROM usuarios WHERE id=$id";
+mysqli_set_charset($conexion, "utf8");
 $consulta = mysqli_query($cnx, $sql);
 
 $result = mysqli_fetch_array($consulta);
