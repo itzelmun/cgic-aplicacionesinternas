@@ -47,10 +47,8 @@ tr:nth-child(even){ background: #FFFFFF;}
                 <strong>Vigencia</strong>
             </td>
         </tr>
-
          <?
                   if (isset($_GET['res'])){
-
                                   $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 AND nivelsni = '$res' ORDER BY area ASC";    }
                                 else{
                                           $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 ORDER BY area ASC"; }
@@ -58,7 +56,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                          include("conexion.php");
                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
-
           while($registros = mysqli_fetch_array($consulta))
                                          {
                                                 $grado  = $registros['grado'];
