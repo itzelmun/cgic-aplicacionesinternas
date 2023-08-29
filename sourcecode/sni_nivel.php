@@ -7,7 +7,6 @@ color:#FFFFFF;
 tr:nth-child(odd){ background: #CFE2CE;}
 tr:nth-child(even){ background: #FFFFFF;}
 </style>
-
     <h2 class="verde"><img src="imagenes/vineta.jpg" /><strong>SNI Nivel</strong></h2>
     <div align="right"><p align="right"><strong><font color="#FD8431">Buscar Nivel</font></strong>
                                   <select style="display:inline; float:none; width:100px" name="nivel" onchange = "location.href='home-gral.php?opc=sni_nivel&res='+this.value" >
@@ -19,7 +18,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                   </select>
                                 </p>
                               </div>
-
      <p align="center" class="titulo"><strong class="verde"><strong class="verde"><strong class="verde"><strong class="verde"><strong class="verde"><strong class="verde">Nivel:
                                   <?
                                          if (isset($_GET['res']))
@@ -31,7 +29,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                           ?>
                                   </strong></strong></strong></strong></strong>
                                   </strong></p>
-
         <table id="sni">
         <tr id="titular" class="blanco fondo_verde">
                 <td>
@@ -52,7 +49,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                   $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 AND nivelsni = '$res' ORDER BY area ASC";    }
                                 else{
                                           $cons = "SELECT * FROM sniinvestigadores WHERE vigente=1 ORDER BY area ASC"; }
-
                                          include("conexion.php");
                                          mysqli_set_charset($conexion, "utf8");
                                         $consulta = mysqli_query($conexion, $cons) or die( "Error en query: $sql, el error  es: " . mysqli_error($cnx) );
