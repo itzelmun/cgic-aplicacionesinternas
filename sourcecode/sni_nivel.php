@@ -63,7 +63,6 @@ tr:nth-child(even){ background: #FFFFFF;}
                                                 $area   = $registros['area'];
                                                 $nivel  = $registros['nivelsni'];
                                                 $vigencia = $registros['vigencia'];
-
                                          ?>
                                     <tr>
                                       <td valign=top bordercolor="#F5F5F5">
