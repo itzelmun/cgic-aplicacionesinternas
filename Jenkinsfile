@@ -1,4 +1,5 @@
 pipeline {
+
 	environment{
 		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
 		dockerImageName2 = "devopsucol/cgic-aplicaciones:cgicdb"
