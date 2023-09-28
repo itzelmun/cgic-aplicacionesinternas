@@ -81,7 +81,7 @@ pipeline {
 					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-deployment-source.yaml digesetuser@148.213.1.133:/home/digesetuser/${env.PROJECT_FOLDER}"
       				script{
        	 				try{
-							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
            					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}

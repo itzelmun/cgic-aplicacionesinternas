@@ -49,8 +49,6 @@ spec:
       volumes:
         - name: sessions
           emptyDir: {}
-          persistentVolumeClaim:
-            claimName: cgic-mysql-pvc
 
 ---
 apiVersion: v1
