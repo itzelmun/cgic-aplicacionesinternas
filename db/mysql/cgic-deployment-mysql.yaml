@@ -8,6 +8,20 @@ data:
   password: NFRjQ0Y=
 
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cgic-mysql-pvc
+  namespace: cgic-aplicaciones
+spec:
+  storageClassName: nfs-csi
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
