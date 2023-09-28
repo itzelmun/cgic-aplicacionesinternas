@@ -3,7 +3,7 @@ kind: Secret
 metadata:
   name: cgic-secret
   namespace: cgic-aplicaciones
-type: Opaque
+type: kubernetes.io/base64
 data:
   password: NFRjQ0Y=
 
@@ -45,12 +45,12 @@ spec:
               value: rootpassword
           ports:
             - containerPort: 3306
-              name: cgic-mysql
+              name: cgic-mysql-pvc
           volumeMounts:
-            - name: cgic-mysql-pv
+            - name: cgic-mysql-pvc
               mountPath: /var/lib/mysql
       volumes:
-        - name: cgic-mysql-pv
+        - name: cgic-mysql-pvc
           persistentVolumeClaim:
             claimName: cgic-mysql-pvc
 
