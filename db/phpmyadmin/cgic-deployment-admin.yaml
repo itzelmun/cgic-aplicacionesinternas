@@ -13,29 +13,26 @@ kind: Deployment
 metadata:
   name: cgic-phpmyadmin
   namespace: cgic-aplicaciones
-  labels:
-    app: cgic-phpmyadmin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cgic-phpmyadmin
+      app: cgic-admin
   template:
     metadata:
       labels:
-        app: cgic-phpmyadmin
+        app: cgic-admin
     spec:
       containers:
         - name: cgic-admin
           image: devopsucol/cgic-aplicaciones:cgicdb
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
             - name: PMA_HOST
               value: cgic-mysql-svc
-            - name: PMA_PORT
-              value: "3306"
-            - name: MYSQL_ROOT_PASSWORD
+            - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: cgic-secret
@@ -46,6 +43,14 @@ spec:
               value: "10000K"
             - name: UPLOAD_LIMIT
               value: "10000K"
+          volumeMounts:
+            - name: sessions
+              mountPath: /sessions
+      volumes:
+        - name: sessions
+          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: cgic-mysql-pvc
 
 ---
 apiVersion: v1
@@ -56,9 +61,8 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: cgic-phpmyadmin
+    app: cgic-admin
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-
