@@ -30,9 +30,9 @@ spec:
             - name: MAX_EXECUTION_TIME
               value: "5000"
             - name: MEMORY_LIMIT
-              value: "10000K"
+              value: "80000K"
             - name: UPLOAD_LIMIT
-              value: "10000K"
+              value: "80000K"
           volumeMounts:
             - name: sessions
               mountPath: /sessions
