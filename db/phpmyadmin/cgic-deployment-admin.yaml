@@ -8,7 +8,6 @@ data:
   password: NFRjQ0Y=
 
 ---
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
