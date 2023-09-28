@@ -53,8 +53,7 @@ metadata:
 spec:
   selector:
     app: cgic-mysql
-  type: LoadBalancer
-  loadBalancerIP: 148.213.1.148
+  type: ClusterIP
   ports:
   - name: cgic-mysql
     port: 3306

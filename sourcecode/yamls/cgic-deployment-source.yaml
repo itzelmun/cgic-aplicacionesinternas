@@ -43,14 +43,7 @@ spec:
       labels:
         app: cgic-aplicacion
     spec:
-      initContainers:
-      - name: volume-permissions
-        image: busybox
-        command: ["sh", "-c", "chown -R 999:999 /var/lib/                                                                mysql"]
-        volumeMounts:
-        - name: cgic-aplicacion
-          mountPath: /var/lib/mysql
-        containers:
+      containers:
         - name: cgic-aplicacion
           image: devopsucol/cgic-aplicaciones:cgic
           env:
@@ -85,8 +78,7 @@ metadata:
 spec:
   selector:
     app: cgic-aplicacion
-  type: LoadBalancer
-  loadBalancerIP: 148.213.1.148
+  type: ClusterIP
   ports:
   - name: cgic-aplicacion
     port: 3306
