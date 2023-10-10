@@ -6,8 +6,6 @@ pipeline {
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
-		PROJECT_FOLDER = "cgic-aplicaciones"
-
 	}
 
  	agent any
