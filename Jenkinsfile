@@ -1,13 +1,11 @@
 pipeline {
 	environment{
-		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
-		dockerImageName2 = "devopsucol/cgic-aplicaciones:cgicdb"
+		dockerImageName1 = "variantggg/005thor:cgic"
+		dockerImageName2 = "variantggg/005thor:cgicdb"
 		dockerImage1 = ""
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
     	PATH = "${env.SONAR_SCANNER_HOME}/bin:${env.PATH}"
-		PROJECT_FOLDER = "cgic-aplicaciones"
-
 	}
 
  	agent any
@@ -52,7 +50,7 @@ pipeline {
 
 	 	stage('Subir Imagen') {
 	  		environment {
-	   			registryCredential = 'devopsucol-dockerhub'
+	   			registryCredential = 'variantggg_dockerhub'
 	   		}
 	  		steps {
 				dir('sourcecode') {
@@ -73,15 +71,28 @@ pipeline {
 	    	}
       	}
 
+
+		stage('Correr POD aplicacion') {
+
 		stage('Correr POD proyecto') {
+
 		 	steps{
 
 				sshagent(['digesetuserssh']) {
-					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-deployment-source.yaml digesetuser@148.213.1.133:/home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-deployment-source.yaml digesetuser@148.213.1.133:/home/digesetuser/${env.PROJECT_FOLDER}"
       				script{
        	 				try{
-							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
-           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/cgic-deployment-source.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-aplicacion -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
+          				}catch(error)
+       					{}
+					}
+				}
+				sshagent(['digesetuserssh']) {
+					sh "scp -r -o StrictHostKeyChecking=no sourcecode/yamls/cgic-storage.yaml digesetuser@148.213.1.133:/home/digesetuser/${env.PROJECT_FOLDER}"
+      				script{
+       	 				try{
+							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/cgic-storage.yaml --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
@@ -92,11 +103,11 @@ pipeline {
 		stage('Correr POD MySQL') {
 		 	steps{
 				sshagent(['digesetuserssh']) {
-			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-deployment-mysql.yaml digesetuser@148.213.1.133:/home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no db/mysql/cgic-deployment-mysql.yaml digesetuser@148.213.1.133:/home/digesetuser/${env.PROJECT_FOLDER}"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
-							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/cgic-deployment-mysql.yaml --kubeconfig=/home/digesetuser/.kube/config"
+							sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-mysql -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}
@@ -108,11 +119,11 @@ pipeline {
 		stage('Correr POD phpmyadmin') {
 		 	steps{
 		   		sshagent(['digesetuserssh']) {
-			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-deployment-admin.yaml digesetuser@148.213.1.133:/home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/"
+			 		sh "scp -r -o StrictHostKeyChecking=no db/phpmyadmin/cgic-deployment-admin.yaml digesetuser@148.213.1.133:/home/digesetuser/${env.PROJECT_FOLDER}"
       				script{
        	 				try{
-           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/digesetuser/${env.PROJECT_FOLDER}/yamls/cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
-           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl apply -f /home/digesetuser/${env.PROJECT_FOLDER}/cgic-deployment-admin.yaml --kubeconfig=/home/digesetuser/.kube/config"
+           					sh "ssh digesetuser@148.213.1.133 microk8s.kubectl rollout restart deployment cgic-phpmyadmin -n cgic-aplicaciones --kubeconfig=/home/digesetuser/.kube/config"
           				}catch(error)
        					{}
 					}

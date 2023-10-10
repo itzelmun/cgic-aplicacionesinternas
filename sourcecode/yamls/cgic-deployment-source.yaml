@@ -4,55 +4,25 @@ metadata:
   name: cgic-aplicaciones
 
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: cgic-mysql-pvc
-  namespace: cgic-aplicaciones
-spec:
-  storageClassName: nfs-csi
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cgic-secret
-  namespace: cgic-aplicaciones
-type: Opaque
-data:
-  password: NFRjQ0Y=
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cgic-aplicacion
   namespace: cgic-aplicaciones
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: cgic-aplicacion
+   matchLabels:
+    app: cgic-aplicacion
+  replicas: 1
   template:
     metadata:
       labels:
         app: cgic-aplicacion
+        role: cgic-aplicacion
     spec:
-      initContainers:
-      - name: volume-permissions
-        image: busybox
-        command: ["sh", "-c", "chown -R 999:999 /var/lib/                                                                mysql"]
-        volumeMounts:
+      containers:
         - name: cgic-aplicacion
-          mountPath: /var/lib/mysql
-        containers:
-        - name: cgic-aplicacion
-          image: devopsucol/cgic-aplicaciones:cgic
+          image: variantggg/005thor:cgic
           env:
             - name: MYSQL_HOST
               value: cgic-mysql-svc
@@ -65,16 +35,10 @@ spec:
                 secretKeyRef:
                   name: cgic-secret
                   key: password
+          imagePullPolicy: Always
           ports:
-            - containerPort: 3306
+            - containerPort: 80
               name: cgic-aplicacion
-          volumeMounts:
-            - name: cgic-mysql-pv
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: cgic-mysql-pv
-          persistentVolumeClaim:
-            claimName: cgic-mysql-pvc
 
 ---
 apiVersion: v1
@@ -82,12 +46,18 @@ kind: Service
 metadata:
   name: cgic-aplicacion
   namespace: cgic-aplicaciones
+  labels:
+    app: cgic-aplicacion
 spec:
   selector:
-    app: cgic-aplicacion
-  type: LoadBalancer
-  loadBalancerIP: 148.213.1.148
+   app: cgic-aplicacion
+  type: ExternalName
+  externalName: nginx-internal.service-ns.svc.cluster.local
+  type: ClusterIP
   ports:
-  - name: cgic-aplicacion
-    port: 3306
-    targetPort: 3306
+   - name: http
+     port: 80
+     protocol: TCP
+     targetPort: 80
+  selector:
+    role: cgic-aplicacion
