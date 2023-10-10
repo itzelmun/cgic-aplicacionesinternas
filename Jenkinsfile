@@ -71,7 +71,11 @@ pipeline {
 	    	}
       	}
 
+
 		stage('Correr POD aplicacion') {
+
+		stage('Correr POD proyecto') {
+
 		 	steps{
 
 				sshagent(['digesetuserssh']) {
