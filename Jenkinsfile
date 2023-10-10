@@ -22,8 +22,8 @@ pipeline {
       		steps {
         		withSonarQubeEnv('sonarqube') {
          		sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
-					-Dsonar.projectKey=cgic-aplicacion \
-					-Dsonar.projectName=cgic-aplicacion \
+					-Dsonar.projectKey=cgic-aplicaciones \
+					-Dsonar.projectName=cgic-aplicaciones \
 					-Dsonar.projectVersion=1.0 \
 					-Dsonar.sources=sourcecode \
 					-Dsonar.language=php \
