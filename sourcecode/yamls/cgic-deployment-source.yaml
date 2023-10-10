@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: cgic-aplicacion
-          image: devopsucol/cgic-aplicaciones:cgic
+          image: variantggg/005thor:cgic
           env:
             - name: MYSQL_HOST
               value: cgic-mysql-svc

@@ -1,7 +1,7 @@
 pipeline {
 	environment{
-		dockerImageName1 = "devopsucol/cgic-aplicaciones:cgic"
-		dockerImageName2 = "devopsucol/cgic-aplicaciones:cgicdb"
+		dockerImageName1 = "variantggg/005thor:cgic"
+		dockerImageName2 = "variantggg/005thor:cgicdb"
 		dockerImage1 = ""
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
@@ -52,7 +52,7 @@ pipeline {
 
 	 	stage('Subir Imagen') {
 	  		environment {
-	   			registryCredential = 'devopsucol-dockerhub'
+	   			registryCredential = 'variantggg_dockerhub'
 	   		}
 	  		steps {
 				dir('sourcecode') {
