@@ -72,7 +72,6 @@ pipeline {
 	    	}
       	}
 
-
 		stage('Correr POD aplicacion') {
 
 		 	steps{
