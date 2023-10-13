@@ -1,7 +1,7 @@
 pipeline {
 	environment{
-		dockerImageName1 = "variantggg/005thor:cgic"
-		dockerImageName2 = "variantggg/005thor:cgicdb"
+		dockerImageName1 = "sistemasudec/cgic:cgic"
+		dockerImageName2 = "sistemasudec/cgic:cgicdb"
 		dockerImage1 = ""
 		dockerImage2 = ""
 		SONAR_SCANNER_HOME = "/opt/sonar-scanner"
@@ -14,7 +14,7 @@ pipeline {
 	stages {
 		stage('Chechout Source'){
 	  		  steps {
-                git credentialsId: 'devops-github' , url: 'https://github.com/sistemas-ucol-mx/cgic_aplicacionesinternas.git', branch: 'main'
+                git credentialsId: 'github_credential' , url: 'https://github.com/itzelmun/cgic-aplicacionesinternas.git', branch: 'main'
             }
 	 	}
 
@@ -51,7 +51,7 @@ pipeline {
 
 	 	stage('Subir Imagen') {
 	  		environment {
-	   			registryCredential = 'variantggg_dockerhub'
+	   			registryCredential = 'sistemasudec'
 	   		}
 	  		steps {
 				dir('sourcecode') {
